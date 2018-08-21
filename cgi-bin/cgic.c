@@ -197,10 +197,10 @@ int main(int argc, char *argv[]) {
 	cgiGetenv(&cgiCookie, "HTTP_COOKIE");
 #ifdef CGICDEBUG
 	CGICDEBUGSTART
-	if(dout!=0)
-	{fprintf(dout, "cgimain cntlen %d \n", cgiContentLength);
-	fprintf(dout, "cgi req method %s\n", cgiRequestMethod);
-	fprintf(dout, "cgi cnt type %s\n", cgiContentType);
+	if(dout!=0 &&0)
+	{ fprintf(dout, "cgimain cntlen %d \n", cgiContentLength);
+	  fprintf(dout, "cgi req method %s\n", cgiRequestMethod);
+	  fprintf(dout, "cgi cnt type %s\n", cgiContentType);
 	CGICDEBUGEND}
 
 #endif /* CGICDEBUG */
