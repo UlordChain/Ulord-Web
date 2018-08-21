@@ -24,7 +24,9 @@ int main()
     char buffer[200];
     char buffer1[100];
 
-    querynode();
+    //system("ulord-cli stop");
+    system("ulordd & ");
+   //    querynode();
    // config_UlordData_Read();
 
     return 0;

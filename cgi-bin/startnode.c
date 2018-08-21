@@ -31,7 +31,7 @@ int cgiMain()
        fprintf(cgiOut,"{\"session\":\"failed\",\"status\":0}");
         return 0;
     }
-    DEBUGINFO("status cgimain start\n");
+    DEBUGINFO("startnode cgimain start\n");
     Session * mysession=QuerySession(sessionid);
     if (!mysession)
     {
@@ -40,9 +40,15 @@ int cgiMain()
         return 0;
     }
 
+    char *home;
+    home = getenv("HOME");
+    setenv("HOME","/home/ulord",1);
+    home = getenv("HOME");
 
     cgiHeaderContentType("application/json");
+    DEBUGINFO("startnode cmd start\n");
     int ret = startnode();
+    DEBUGINFO("startnode cmd end\n");
     if(ret>0)
     { 
          fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":1}");
@@ -58,13 +64,11 @@ int cgiMain()
 
 int startnode()
 {
-	char *pdata = "ulordd";
 	char cmd[128] = { 0 };
 	int pid;
-
  
-        sprintf(cmd,"ulordd & ");
-        system(cmd);
-   return 1;
+    sprintf(cmd,"/home/ulord/bin/ulordd & ");
+    system(cmd);
+    return 1;
 }
 
