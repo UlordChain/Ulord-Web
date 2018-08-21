@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ulord主节点管理后台-修改密码</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+	<div class="web-container">
+		<div class="form-bg">
+		        <div class="container container2">
+		            <div class="row">
+		                <div class="col-md-offset-3 col-md-6">
+		                    <form class="form-horizontal">
+		                        <span class="heading">修改密码</span>
+		                         <div class="form-group">
+		                            <input type="password" class="form-control" maxlength="20" id="oldpassword" placeholder="请输入旧密码">
+		                            <i class="fa fa-lock"></i>
+		                        </div>
+		                        <div class="form-group">
+		                            <input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码">
+		                            <i class="fa fa-lock"></i>
+		                        </div>
+		                        <div class="form-group">
+		                            <input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码">
+		                            <i class="fa fa-lock"></i>
+		                        </div>
+		                        <div class="form-group help">
+		                        	<!-- <a class="goback" href="index.html">返回登录</a> -->
+		                            <a id="submit" href="javascript:;" class="btn btn-default">修改密码</a>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+	</div>
+	
+	<script src="js/jquery.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+  	<script>
+  		$(function(){
+  			var reg=/^[0-9a-zA-Z]+$/;
+  			/*$("#password").blur(function() {
+	           $("#msg").css("display","none");
+	           if ( newPwd == "" || newPwd == null) {
+	              $("#msg").html("请输入新密码！").css("display","block");
+	           } else if (!reg.test(newPwd)) {
+	              $("#msg").html("密码格式不正确,请重新输入！").css("display","block");
+	           }
+	       });
+  			$("#password").focus(function() {
+  				if ( newPwd !== "" || newPwd !== null) {
+  					$("#msg").css("display","none");
+  				}
+  			})*/
+  			$('#submit').click(function(){
+  				var ar=[];
+	            $('input[type=password]').each(function(){
+	                ar.push($(this).val());
+	            });
+	            var old = ar[0];
+	            var a=ar[1];
+	            var b=ar[2];
+	            if(a == '' || a == null){
+	            	alert('请输入新密码！');
+	            }else if(b == '' || b == null){
+	            	alert('请再次输入新密码！')
+	            }else if(!reg.test(a) || !reg.test(b)){
+	            	alert('密码格式不正确,请重新输入！');
+	            }else if(a != b){
+	            	alert('密码不一致，请重新输入!');
+	            }else{
+	  				$.ajax({
+		                type: "GET",
+		                url: '../cgi-bin/password.cgi',
+		                data: {
+		                	username: 'admin',
+		                	password: a,
+		                	oldpassword:old,
+		                	para: window.localStorage.getItem('sessionid')         	
+		                },
+		                success: function (data){
+		                        if (data.status === 1) {
+		                        	window.localStorage.setItem('PwdModified','1')
+	            					window.location.href = "webConfig.html";
+		                        } else {
+		                            alert('异常错误');
+		                        }
+
+		                },
+		                error: function(error){
+		                    alert('返回错误信息：',error);
+		                }
+		            });
+	            }
+
+	            //alert("old-pass:"+a+"new:"+b);
+	        });
+
+  		})
+  	</script>
+</body>
+</html>

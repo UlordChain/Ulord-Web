@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ulord主节点管理后台-主节点配置</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+	<div class="switch-container clearfix in">
+		<div class="nav-left">
+			<h4>Ulord主节点管理系统</h4>
+			<ul>
+				<li><a href="#">主节点</a></li>
+				<li><a href="resetPwd.html">修改密码</a></li>
+			</ul>
+		</div>
+		<div class="form-container">
+			<div class="topBar clearfix">
+				<div class="switcher" id="switcher"></div>
+				<a href="javascript:;" class="logout" id="logout">登出</a>
+			</div>
+			<div class="form-config">
+				<div class="container">
+					
+					<div class="row switch">
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							<div class="title inline">主节点开关：</div>
+							<div class="inline">
+								<label class="switch-btn circle-style">
+									<input class="checked-switch" type="checkbox">
+									<span class="text-switch" data-yes="启动" data-no="关闭"></span> 
+									<span class="toggle-btn"></span> 
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							<div class="title2">主节点程序状态：<span class="gray">未运行</span></div>
+						</div>
+					</div>
+					<div class="faq">
+						<span>填写配置须知：</span>
+						<a href="https://ulorder.one/doc" target="_blank">https://ulorder.one/doc</a>							
+					</div>
+					<form class="form-horizontal form-box" role="form">
+						<h3>RPC设置<span>（必填）</span></h3>
+						<div class="form-group">
+							<label for="rpcName" class="col-sm-3 control-label">RPC用户名：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="rpcName" placeholder="请输入RPC用户名" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="rpcPwd" class="col-sm-3 control-label">RPC密码：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="rpcPwd" placeholder="请输入RPC密码" required>
+							</div>
+						</div>
+						<h3>主节点设置<span>（必填）</span></h3>
+						<div class="form-group">
+							<label for="ipAddress" class="col-sm-3 control-label">公网IP：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="ipAddress" placeholder="请输入公网IP" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="nodeSign" class="col-sm-3 control-label">广播的主节点签名：</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="3" id="nodeSign" placeholder="请输入广播的主节点签名" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="featureCode" class="col-sm-3 control-label">主节点特征码：</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="3" id="featureCode" placeholder="请输入主节点特征码" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txHash" class="col-sm-3 control-label">交易Hash：</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="3" id="txHash" placeholder="请输入交易Hash" required></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="txIndex" class="col-sm-3 control-label">交易索引：</label>
+							<div class="col-sm-9">
+								<select class="form-control" id="txIndex">
+									<option>0</option>
+									<option>1</option>
+								</select>
+							</div>
+						</div>
+
+
+						<h3>主节点（选填）</h3>
+						<div class="form-group">
+							<label for="addIp" class="col-sm-3 control-label">额外增加的同步节点：</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="addIp" placeholder="请输入额外增加的同步节点IP">
+							</div>
+						  </div><!-- 
+						  <div class="form-group">
+						    <label for="nodeSign" class="col-sm-3 control-label">证书：</label>
+						    <div class="col-sm-9">
+						      <textarea class="form-control" rows="3" id="nodeSign" placeholder="请输入证书"></textarea>
+						    </div>
+						</div> -->
+						<div class="form-group">
+							<label for="timestamp" class="col-sm-3 control-label">证书到期日期：</label>
+							<div class="col-sm-9">
+								<input type="number" class="form-control" id="timestamp" placeholder="请输入时间戳">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="version" class="col-sm-3 control-label">证书版本：</label>
+							<div class="col-sm-9">
+								<input type="number" class="form-control" id="version" placeholder="请输入证书版本">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="publicKey" class="col-sm-3 control-label">验证证书的公钥：</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="3" id="publicKey" placeholder="请输入验证证书的公钥"></textarea>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label"></label>
+							<div class="col-sm-9">
+								<a id="submitConfig" href="javascript:;" class="btn btn-default">写入主节点配置</a>
+							</div>
+						</div>	
+
+					</form>
+
+
+					<!-- data-backdrop="false"去除遮罩层  -->
+					<div class="modal fade bd-example-modal-sm"  id="myModal" role="dialog" data-backdrop="false"  aria-hidden="true">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<p class="text-center mb-0">
+									<i class="fa fa-check-circle text-success mr-1" aria-hidden="true"></i>
+									<span class="content">提交成功</span>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal fade" tabindex="-1" role="dialog" id='alert'>
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title">重要操作提醒</h4>
+								</div>
+								<div class="modal-body">
+									
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss='modal'>确定</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+
+					<div class="modal fade" tabindex="-1" role="dialog" id='confirm'>
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title">重要操作提醒</h4>
+								</div>
+								<div class="modal-body">
+									<span class="red"></span>,你还要继续吗？
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss='modal'>取消</button>
+								</div>
+									<button type="button" class="btn btn-primary" id="continue">继续</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!--   	<script src="http://www.runoob.com/try/bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script> -->
+<script src="js/webConfig.js"></script>
+</body>
+</html>

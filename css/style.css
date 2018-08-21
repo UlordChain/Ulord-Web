@@ -1,0 +1,459 @@
+﻿html {
+	width: 100%;
+	height: 100%;
+}
+body {
+	background: #fff;
+	color:#333;
+	width: 100%;
+	height: 100%;
+	font-family:"Microsoft YaHei","Segoe UI","Lucida Grande",Helvetica,Arial,sans-serif;
+}
+
+*{
+	margin: 0;
+	margin: 0;
+}
+.web-container,.form-container{
+	margin: 0 auto;
+	overflow: hidden;
+}
+*,*:after,*:before{
+	-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+}
+.btn.active.focus,.btn.active:focus,.btn.focus,.btn:active.focus,.btn:active:focus,.btn:focus{
+	outline: none;
+}
+ul {
+	margin:0;
+	list-style-type: none;
+}
+a,a:visited,a:hover,a:active,a:focus {
+	text-decoration: none;
+}
+
+ /*web background*/
+.container2{
+    display: table;
+    height: 100%;
+}
+
+.row{
+    display: table-cell;
+    vertical-align: middle;
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align:left;
+    margin-right:-4px;
+}
+
+.form-bg {
+	background: #eee;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    text-align: center;
+}
+.login .user input:hover {
+	cursor: not-allowed;
+}
+.form-horizontal {
+	background: #fff;
+	padding-bottom: 40px;
+	border-radius: 15px;
+}
+.form-horizontal .heading {
+	display: block;
+	font-size: 25px;
+	font-weight: 700;
+	padding: 35px 0;
+	border-bottom: 1px solid #f0f0f0;
+	margin-bottom: 30px;
+	text-align: center;
+}
+.form-horizontal .form-group {
+	padding: 0 40px;
+	margin: 0 0 25px 0;
+	position: relative;
+}
+.form-horizontal .form-control {
+	color: #333;
+	background: #f0f0f0;
+	border: none;
+	border-radius: 5px;
+	box-shadow: none;
+	padding: 0 20px 0 45px;
+	height: 40px;
+	transition: all 0.3s ease 0s;
+}
+.form-horizontal .form-control:focus {
+	background: #e0e0e0;
+	box-shadow: none;
+	outline: 0 none;
+}
+.form-horizontal .form-group i {
+	position: absolute;
+	top: 12px;
+	left: 60px;
+	font-size: 17px;
+	color: #c8c8c8;
+	transition : all 0.5s ease 0s;
+}
+.form-horizontal .form-control:focus + i {
+	color: #00b4ef;
+}
+.form-horizontal .fa-question-circle {
+	display: inline-block;
+	position: absolute;
+	top: 12px;
+	right: 60px;
+	font-size: 20px;
+	color: #808080;
+	transition: all 0.5s ease 0s;
+	text-decoration: none;
+}
+.form-horizontal .fa-question-circle:hover {
+	color: #000;
+}
+.form-horizontal .main-checkbox{
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: #11a3fc;
+	border-radius: 50%;
+	position: relative;
+	margin: 5px 0 0 5px;
+	border: 1px solid #11a3fc;
+}
+.form-horizontal .main-checkbox label {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+.form-horizontal .main-checkbox label:after {
+	content: "";
+	width: 10px;
+	height: 5px;
+	position: absolute;
+	top: 5px;
+	left: 4px;
+	border: 3px solid #fff;
+	border-top: none;
+	border-right: none;
+	background: transparent;
+	opacity: 0;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.form-horizontal .main-checkbox input[type=checkbox] {
+	visibility: hidden;
+}
+.form-horizontal .main-checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+.form-horizontal .text {
+	float: left;
+	margin-left: 7px;
+	line-height: 20px;
+	padding-top: 5px;
+	text-transform: capitalize;
+}
+.form-horizontal .btn {
+	width: 100%;
+	font-size: 14px;
+	color: #fff;
+	background: #00b4ef;
+	border-radius: 5px;
+	padding: 10px 25px;
+	border: none;
+	text-transform: capitalize;
+	transition: all 0.5s ease 0s;
+}
+
+
+
+/* 主节点配置样式 */
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.inline {
+	display: inline;
+}
+.title, .title2 {
+	font-size: 24px;
+}
+/* .title2 {
+	margin-left: 120px;
+} */
+.blue {
+	color: #00af2c;
+}
+.gray {
+	color: gray;
+}
+.green {
+	color:#00CC33;
+}
+.faq {
+	padding-top: 20px;
+}
+.switch {
+	margin-top: 100px;
+	display: inherit;
+}
+.switch-btn {
+	position: relative; 
+	display: inline-block; 
+	vertical-align: top;
+	width: 90px; 
+	height: 30px; 
+	border-radius: 18px; 
+	cursor: pointer;
+}
+.checked-switch {
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	opacity: 0;
+}
+.text-switch {
+	background-color: gray; 
+	border: 1px solid gray; 
+	border-radius: inherit; 
+	color: #fff; 
+	display: block; 
+	font-size: 15px; 
+	height: inherit; 
+	position: relative; 
+	text-transform: uppercase;
+}
+.text-switch:before, .text-switch:after {
+	position: absolute; 
+	top: 50%; 
+	margin-top: -.5em; 
+	line-height: 1; 
+	-webkit-transition: inherit; 
+	-moz-transition: inherit; 
+	-o-transition: inherit; 
+	transition: inherit;
+}
+.text-switch:before {
+	content: attr(data-no); 
+	right: 11px;
+}
+.text-switch:after {
+	content: attr(data-yes); 
+	left: 11px; 
+	color: #FFFFFF; 
+	opacity: 0;
+}
+.checked-switch:checked ~ .text-switch {
+	background-color: #00af2c; 
+	border: 1px solid #00af2c;
+}
+.checked-switch:checked ~ .text-switch:before {
+	opacity: 0;
+}
+.checked-switch:checked ~ .text-switch:after {
+	opacity: 1;
+}
+.toggle-btn {
+	background: linear-gradient(#eee, #fafafa); 
+	border-radius: 100%; 
+	height: 28px; 
+	left: 1px; 
+	position: absolute; 
+	top: 1px; 
+	width: 28px;
+}
+.toggle-btn::before {
+	color: #aaaaaa; 
+	content: "|||"; 
+	display: inline-block; 
+	font-size: 12px; 
+	letter-spacing: -2px; 
+	padding: 4px 0; 
+	vertical-align: middle;
+}
+.checked-switch:checked ~ .toggle-btn {
+	left: 61px;
+}
+ .text-switch, .toggle-btn {
+ 	transition: All 0.3s ease; 
+ 	-webkit-transition: All 0.3s ease; 
+ 	-moz-transition: All 0.3s ease; 
+ 	-o-transition: All 0.3s ease;
+ }
+.circle-style .toggle-btn::before{
+	background: linear-gradient(#dedede, #cacaca); 
+	border-radius: 50%; 
+	content: "";
+	height: 14px; 
+	margin-top: 6px; 
+	padding: 0; 
+	width: 14px;
+}
+/* toggle switch css end */
+.form-config {
+	background: #eee;
+	text-align: center;
+}
+.form-box {
+	background: none;
+	border-radius: 0;
+	text-align: left;
+	padding-bottom: 100px;
+}
+.form-box h3 {
+	padding-top: 50px;
+	padding-bottom: 15px;
+}
+.form-box h3 span {
+	color: red;
+}
+.form-box .form-control {
+	background: #fff;
+	padding: 0 20px;
+}
+.form-box .form-control:focus {
+	background: #fff;
+}
+.form-box textarea.form-control {
+	resize: none;
+	padding: 10px 20px;
+	height: 80px;
+	max-height: 80px;
+}
+
+
+
+
+.modal-content {
+    /* 宽度自适应内容 */
+    width: auto;
+    /* 流出间隙 */
+    padding: 0.2rem 0.4rem;
+    font-size: 16px;
+}
+.modal-content p {
+	margin: 10px 0;
+}
+#myModal {
+	right:auto;
+	bottom:auto;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 767px){
+	.title2 {
+		margin-top: 15px;
+	}
+}
+
+@media only screen and (max-width: 479px){
+	.form-horizontal .form-group{
+		padding: 0 25px;
+	}
+	.form-horizontal .form-group i{
+		left: 45px;
+	}
+	.form-horizontal .btn{
+		padding: 10px 20px;
+	}
+}
+/*左导航栏*/
+
+.switch-container {
+	width: 100%;
+	height: 100%;
+}
+.switch-container>div {
+	float: left;
+	overflow: hidden;
+}
+.switch-container .nav-left {
+	background-color: rgba(0, 21, 41, 1);
+	transition: .5s ease-in-out all;
+	height: 100%;
+	width: 0%;
+}
+.switch-container.in .nav-left {
+	width: 18%;
+
+}
+.switch-container.in .form-container {
+	width: 82%;
+}
+.switch-container .form-container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transition: .5s ease-in-out all;
+	
+}.switch-container .form-container .form-config {
+	height:100%;
+	overflow-y: auto;
+}
+.switch-container .nav-left h4{
+	font-size: 20px;
+	color:rgba(255, 255, 255, 0.8);
+	box-sizing: border-box;
+	padding-left: 12px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	line-height: 60px;
+}
+.switch-container .nav-left ul {
+	padding-left: 20%;
+	width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.switch-container .nav-left ul li a{
+	color:white;
+	font-size: 18px;
+	display: block;
+	line-height: 22px;
+	padding:32px;
+}
+.switch-container .nav-left ul li a:hover {
+	text-decoration: none;
+}
+.form-container .topBar{
+	width: 100%;
+	padding: 0px 60px 0px 30px;
+	background: white;
+	position: absolute;
+	z-index: 5;
+}
+.form-container .topBar .switcher {
+	float: left;
+	width: 36px;
+	height: 32px;
+	margin: 14px 0px;
+	background: url(../imgs/func.png) no-repeat center;
+	background-size: 70%;
+	cursor: pointer;
+}
+.form-container .topBar .logout {
+	float: right;
+	line-height: 60px;
+}
+/*左导航栏*/
