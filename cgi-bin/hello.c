@@ -18,10 +18,11 @@ int main()
     printf("pwd=%s",buffer1);
     printf("content-type:text/html;charset=UTF-8\n\n");
     printf("<TITLE>login: 11111111111 result</TITLE>");
-    printf("<H3>登陆结果</h3>");
+    printf("<H3>login result</h3>");
     date=getenv("QUERY_STRING");
+    stopnode();
     if(date==NULL)
-        printf("<p>错误：数据没有被输入或数据传输发生错误</p >");
+        printf("<p>date ==null </p >");
     else
     {
         sscanf(date,"name=%[^&]&pwd=%s",name,pwd);
@@ -31,3 +32,17 @@ int main()
     }
     return 0;
 }
+
+int stopnode()
+{
+   char cmd[128] = { 0 };
+
+   sprintf(cmd,"/home/ulord/bin/ulord-cli stop");
+   system(cmd);
+
+   sprintf(cmd,"/home/ulord/www/stopnode.sh");
+   system(cmd);
+//   DEBUGINFO("stopnode system cmd end\n");
+   return 1;
+}
+
