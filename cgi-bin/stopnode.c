@@ -58,10 +58,9 @@ int cgiMain()
 
 int stopnode()
 {
-   char *pdata = "ulordd";
    char cmd[128] = { 0 };
 
-   sprintf(cmd,"./ulord-cli stop  ");
+   sprintf(cmd,"ulord-cli stop  ");
    system(cmd);
    return 1;
 }
