@@ -63,7 +63,7 @@ int startnode()
 	int pid;
 
  
-        sprintf(cmd,"./ulordd & ");
+        sprintf(cmd,"ulordd & ");
         system(cmd);
    return 1;
 }
