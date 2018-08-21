@@ -44,22 +44,29 @@ int cgiMain()
     int ret = querypid();
     if(ret>0)
     { 
+	fprintf(cgiOut,"{");
         // cgiHeaderContentType("text/html;charset=gbk\n");
-        fprintf(cgiOut,"{\"ulord\":\"start\",\"status\":1}");
+        fprintf(cgiOut,"\"ulord\":\"start\",\"status\":1,");
 	ret  = querynode();
 	if(ret>0)
 	{
-		fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":1}");
+		fprintf(cgiOut,"\"masternode\":\"start\",\"status\":1");
 	}
 	else
 	{
-		fprintf(cgiOut,"{\"masternode\":\"stop\",\"status\":0}");
+		fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
 	}
+	fprintf(cgiOut,"}");
+       DEBUGINFO2("status ulord is run , masternode is %d\n",ret);
     }
     else
     {
-	fprintf(cgiOut,"{\"ulord\":\"stop\",\"status\":0}");
-	fprintf(cgiOut,"{\"masternode\":\"stop\",\"status\":0}");
+	fprintf(cgiOut,"{");
+	fprintf(cgiOut,"\"ulord\":\"stop\",\"status\":0,");
+	fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
+	fprintf(cgiOut,"}");
+
+        DEBUGINFO("status ulord is disenableed , masternode is disenable\n");
 	
     }
  
@@ -107,37 +114,38 @@ int querypid()
 
 int querynode()
 {
-	char *pdata = "ulordd";
-	char cmd[128] = { 0 };
-	char buff[1024] = { 0 };
-	int pid;
-	FILE *fstream = NULL;
-	memset(buff, 0, sizeof(buff));
+    char cmd[128] = { 0 };
+    char buff[1024] = { 0 };
+    char out[2024] = { 0 };
+    int pid;
+    FILE *fstream = NULL;
+    memset(buff, 0, sizeof(buff));
 
- 
-	//pdata = getenv("QUERY_STRING");
-	if (pdata == NULL)
+    sprintf(cmd, "ulord-cli masterndoe status|grep enable");
+	if (NULL == (fstream = popen(cmd, "r")))
 	{
+            //fprintf(stderr, "execute command failed: %s", strerror(errno));
 	    return 0;
 	}
-	else 
-	{
-		sprintf(cmd, "ulord-cli masterndoe status|grep enable");
-		if (NULL == (fstream = popen(cmd, "r")))
-		{
-			//fprintf(stderr, "execute command failed: %s", strerror(errno));
-			return -1;
-		}
-		while (NULL != fgets(buff, sizeof(buff), fstream)) 
-		{
-			if (strlen(buff) > 0) 
-			{
-				//printf("%s", buff);
-				pid = atoi(buff);
-				break;
-			}
-		}
-		pclose(fstream);
-		return pid;
-	}
+    while (!feof(fstream))
+    {
+        // 从文件中读取一行
+        if (fgets(buff, 512, fstream))
+        {
+            // 连接字符串
+            strcat(out, buff);
+        }
+    }
+
+
+	pclose(fstream);
+
+    char * pFind = strstr(out , "started");
+
+    if(pFind !=0)
+       return 1;
+    
+    return 0;
 }
+
+
