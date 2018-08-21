@@ -34,6 +34,7 @@ int querynode()
 {
     char cmd[128] = { 0 };
     char buff[1024] = { 0 };
+    char out[2024] = { 0 };
     int pid;
     FILE *fstream = NULL;
     memset(buff, 0, sizeof(buff));
@@ -51,18 +52,41 @@ int querynode()
 
     printf("get buff output \n");
 
-    while (NULL != fgets(buff, sizeof(buff), fstream))
+	while (!feof(fstream))
+	{
+		// 从文件中读取一行
+		if (fgets(buff, 512, fstream))
+		{
+			// 连接字符串
+			strcat(out, buff);
+		}		
+   }
+   
+    if (strlen(out) > 0)
     {
-       if (strlen(buff) > 0)
-       {
-           printf("buff output %s \n ", buff);
-           //pid = atoi(buff);
-           break;
-       }
+           printf("buff output %s \n ", out);
     }
+
+char testbuf[]=" { \
+     \"vin\": \"CTxIn(COutPoint(950ddc347e4f7e45a7810d33a4db247e7426bb122d471f4dcbe5501d848fdab8, 1), scriptSig=)\", \
+  \"service\": \"39.104.71.201:39888\", \
+  \"publickey\": \"04d9588f788c3fb5836ba41d9c74753d6e2acd7ab495c504f9204a1ea30e753610e8fc8b2fba95e3cf60b457dca6840ae465ed6dbe3ae2083321740cf1c3f5a25f\", \
+  \"payee\": \"UdQV2H3CD6FbLeaKwnspf7MRaLXB8jQvn2\",\
+  \"license version\": 1,\
+  \"license period\": 1536734963,\
+  \"license data\":\"IMD++yadzrfpKHarzu5rjMecO+4ZGzaJQ1ILWfOwCSpodCSzXk2eh23YF2AU4KTgL3cPQmGWX86vSEAIFF4DIwA=\", \
+  \"license status\": \"enable\",\
+  \"status\": \"Masternode successfully started\" \
+}";
+
+    char * pFind = strstr(testbuf , "started");    
+    
+    printf("\nfinde f output %s \n ", pFind);
+
     pclose(fstream);
     return pid;
     
     return 0;
 }
+
 
