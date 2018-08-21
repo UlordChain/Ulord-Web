@@ -28,15 +28,15 @@ int cgiMain()
     if (sessionid < 0)
     {
         cgiHeaderContentType("application/json");
-	fprintf(cgiOut,"{\"session\":\"failed\",\"status\":0}");
+    	fprintf(cgiOut,"{\"session\":\"failed\",\"status\":0}");
         return 0;
     }
-    DEBUGINFO("status cgimain start\n");
+   // DEBUGINFO("status cgimain start\n");
     Session * mysession=QuerySession(sessionid);
     if (!mysession)
     {
         cgiHeaderContentType("application/json");
-	fprintf(cgiOut,"{\"session\":\"failed\",\"status\":0}");
+	    fprintf(cgiOut,"{\"session\":\"failed\",\"status\":0}");
         return 0;
     }
 	
@@ -44,29 +44,29 @@ int cgiMain()
     int ret = querypid();
     if(ret>0)
     { 
-	fprintf(cgiOut,"{");
+	  fprintf(cgiOut,"{");
         // cgiHeaderContentType("text/html;charset=gbk\n");
-        fprintf(cgiOut,"\"ulord\":\"start\",\"status\":1,");
-	ret  = querynode();
-	if(ret>0)
-	{
-		fprintf(cgiOut,"\"masternode\":\"start\",\"status\":1");
-	}
-	else
-	{
-		fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
-	}
-	fprintf(cgiOut,"}");
-       DEBUGINFO2("status ulord is run , masternode is %d\n",ret);
+      fprintf(cgiOut,"\"ulord\":\"start\",\"status\":1,");
+	  ret  = querynode();
+	  if(ret>0)
+	  {
+	 	fprintf(cgiOut,"\"masternode\":\"start\",\"status\":1");
+	  }
+	  else
+	  {
+	   	fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
+	  } 
+      fprintf(cgiOut,"}");
+      //DEBUGINFO2("status ulord is run , masternode is %d\n",ret);
     }
     else
     {
-	fprintf(cgiOut,"{");
-	fprintf(cgiOut,"\"ulord\":\"stop\",\"status\":0,");
-	fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
-	fprintf(cgiOut,"}");
+      fprintf(cgiOut,"{");
+	  fprintf(cgiOut,"\"ulord\":\"stop\",\"status\":0,");
+	  fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
+	  fprintf(cgiOut,"}");
 
-        DEBUGINFO("status ulord is disenableed , masternode is disenable\n");
+       // DEBUGINFO("status ulord is disenableed , masternode is disenable\n");
 	
     }
  

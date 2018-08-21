@@ -27,7 +27,7 @@ Application * GetApplication()
 	else
 		create=1;
 	Application* app=(Application*)shmat(shm_id,NULL,0);
-        DEBUGINFO2("get_app app = %d\n", shm_id);
+    //  DEBUGINFO2("get_app app = %d\n", shm_id);
 	if(create)
 		memset(app,0,sizeof(Application));
 	return app;
