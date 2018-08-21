@@ -111,9 +111,12 @@
 						</div> -->
 						<div class="form-group">
 							<label for="timestamp" class="col-sm-3 control-label">证书到期日期：</label>
-							<div class="col-sm-9">
-								<input type="number" class="form-control" id="timestamp" placeholder="请输入时间戳">
-							</div>
+								<div class="col-sm-6">								
+									<input type="number" class="form-control" id="timestamp" placeholder="请输入时间戳">
+								</div>
+								<div class="formatedDate col-sm-3" id="formatedDate">
+									
+								</div>
 						</div>
 						<div class="form-group">
 							<label for="version" class="col-sm-3 control-label">证书版本：</label>
@@ -150,7 +153,8 @@
 							</div>
 						</div>
 					</div>
-					
+
+					<!-- 提示模态框 -->
 					<div class="modal fade" tabindex="-1" role="dialog" id='alert'>
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -164,10 +168,11 @@
 								<div class="modal-footer">
 									<button type="button" class="btn btn-primary" data-dismiss='modal'>确定</button>
 								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
+							</div>
+						</div>
+					</div>
 
+					<!-- 继续前进模态框 -->
 					<div class="modal fade" tabindex="-1" role="dialog" id='confirm'>
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -179,21 +184,61 @@
 									<span class="red"></span>,你还要继续吗？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss='modal'>取消</button>
+									<button type="button" class="btn btn-primary" data-dismiss='modal' id="continue">继续</button>
+									<button type="button" class="btn btn-default" data-dismiss='modal' id="cancelOp">取消</button>
 								</div>
-									<button type="button" class="btn btn-primary" id="continue">继续</button>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" tabindex="-1" role="dialog" id='resetPwd' data-backdrop="static">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-body">
+									<div class="web-container">
+											<div class="container container2">
+												<div class="row">
+													<div class="col-md-6">
+														<form class="form-horizontal">
+															<span class="heading">请立即修改默认密码</span>
+															<div class="form-group">
+																<input type="password" class="form-control" maxlength="20" id="oldpassword" placeholder="请输入旧密码">
+																<i class="fa fa-lock"></i>
+															</div>
+															<div class="form-group">
+																<input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码">
+																<i class="fa fa-lock"></i>
+															</div>
+															<div class="form-group">
+																<input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码">
+																<i class="fa fa-lock"></i>
+															</div>
+															<div class="Pwd-tips">
+																所有人都可以访问此网站并通过默认密码登陆，因此需要立刻修改密码以免造成损失
+															</div>
+															<div class="form-group help">
+																<!-- <a class="goback" href="index.html">返回登录</a> -->
+																<a id="submit" href="javascript:;" class="btn btn-default">修改密码</a>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+									</div>
 								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
+							</div>
+						</div>
+					</div>
+
+					
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!--   	<script src="http://www.runoob.com/try/bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script> -->
-<script src="js/webConfig.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<!--   	<script src="http://www.runoob.com/try/bootstrap/twitter-bootstrap-v2/js/bootstrap-modal.js"></script> -->
+	<script src="js/webConfig.js"></script>
 </body>
 </html>

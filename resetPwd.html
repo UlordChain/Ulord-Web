@@ -10,99 +10,142 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-	<div class="web-container">
-		<div class="form-bg">
-		        <div class="container container2">
-		            <div class="row">
-		                <div class="col-md-offset-3 col-md-6">
-		                    <form class="form-horizontal">
-		                        <span class="heading">修改密码</span>
-		                         <div class="form-group">
-		                            <input type="password" class="form-control" maxlength="20" id="oldpassword" placeholder="请输入旧密码">
-		                            <i class="fa fa-lock"></i>
-		                        </div>
-		                        <div class="form-group">
-		                            <input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码">
-		                            <i class="fa fa-lock"></i>
-		                        </div>
-		                        <div class="form-group">
-		                            <input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码">
-		                            <i class="fa fa-lock"></i>
-		                        </div>
-		                        <div class="form-group help">
-		                        	<!-- <a class="goback" href="index.html">返回登录</a> -->
-		                            <a id="submit" href="javascript:;" class="btn btn-default">修改密码</a>
-		                        </div>
-		                    </form>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
+	<div class="modal fade bd-example-modal-sm"  id="myModal" role="dialog" data-backdrop="false"  aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<p class="text-center mb-0">
+					<i class="fa fa-check-circle text-success mr-1" aria-hidden="true"></i>
+					<span class="content">提交成功</span>
+				</p>
+			</div>
+		</div>
 	</div>
-	
+	<div class="switch-container clearfix in">
+		<div class="nav-left">
+			<h4>Ulord主节点管理系统</h4>
+			<ul>
+				<li><a href="webConfig.html">主节点</a></li>
+				<li><a href="#">修改密码</a></li>
+			</ul>
+		</div>
+		<div class="form-container">
+			<div class="topBar clearfix">
+				<div class="switcher" id="switcher"></div>
+				<a href="javascript:;" class="logout" id="logout">登出</a>
+			</div>
+			<div class="form-bg">
+				<div class="container container2">
+					<div class="row">
+						<div class="col-md-offset-3 col-md-6">
+							<form class="form-horizontal">
+								<span class="heading">修改密码</span>
+								<div class="form-group">
+									<input type="password" class="form-control" maxlength="20" id="oldpassword" placeholder="请输入旧密码">
+									<i class="fa fa-lock"></i>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码">
+									<i class="fa fa-lock"></i>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码">
+									<i class="fa fa-lock"></i>
+								</div>
+								<div class="form-group help">
+									<!-- <a class="goback" href="index.html">返回登录</a> -->
+									<a id="submit" href="javascript:;" class="btn btn-default">修改密码</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="js/jquery.min.js"></script>
-  	<script src="js/bootstrap.min.js"></script>
-  	<script>
-  		$(function(){
-  			var reg=/^[0-9a-zA-Z]+$/;
-  			/*$("#password").blur(function() {
-	           $("#msg").css("display","none");
-	           if ( newPwd == "" || newPwd == null) {
-	              $("#msg").html("请输入新密码！").css("display","block");
-	           } else if (!reg.test(newPwd)) {
-	              $("#msg").html("密码格式不正确,请重新输入！").css("display","block");
-	           }
-	       });
-  			$("#password").focus(function() {
-  				if ( newPwd !== "" || newPwd !== null) {
-  					$("#msg").css("display","none");
-  				}
-  			})*/
-  			$('#submit').click(function(){
-  				var ar=[];
-	            $('input[type=password]').each(function(){
-	                ar.push($(this).val());
-	            });
-	            var old = ar[0];
-	            var a=ar[1];
-	            var b=ar[2];
-	            if(a == '' || a == null){
-	            	alert('请输入新密码！');
-	            }else if(b == '' || b == null){
-	            	alert('请再次输入新密码！')
-	            }else if(!reg.test(a) || !reg.test(b)){
-	            	alert('密码格式不正确,请重新输入！');
-	            }else if(a != b){
-	            	alert('密码不一致，请重新输入!');
-	            }else{
-	  				$.ajax({
-		                type: "GET",
-		                url: '../cgi-bin/password.cgi',
-		                data: {
-		                	username: 'admin',
-		                	password: a,
-		                	oldpassword:old,
-		                	para: window.localStorage.getItem('sessionid')         	
-		                },
-		                success: function (data){
-		                        if (data.status === 1) {
-		                        	window.localStorage.setItem('PwdModified','1')
-	            					window.location.href = "webConfig.html";
-		                        } else {
-		                            alert('异常错误');
-		                        }
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+		$(function(){
+  			// 提示框myModal
+	// @param label 0:warning 1:success 2： danger
+	// @param text 提示文字
+	// @param time 显示时间
+	function myModal(label,text,time){
+		time = time || 10000
+		var collection = 'fa-check-circle text-success fa-exclamation-circle text-warning fa-times-circle text-danger'
+		if(label==1){
+			$('#myModal .modal-content .fa').removeClass(collection).addClass('fa-check-circle text-success')
+		}else if(label==0){
+			$('#myModal .modal-content .fa').removeClass(collection).addClass('fa-exclamation-circle text-warning')
+		}else if(label==2){
+			$('#myModal .modal-content .fa').removeClass(collection).addClass('fa-times-circle text-danger')
+		}
+		$('#myModal .content').html(text);
+		$('#myModal').modal('show')
+		setTimeout(function(){
+			$('#myModal').modal('hide')
+		}, time)
+	}
+	var reg=/^[0-9a-zA-Z]+$/;
+	$('#submit').click(function(){
+		var ar=[];
+		$('input[type=password]').each(function(){
+			ar.push($(this).val());
+		});
+		var old = ar[0];
+		var a=ar[1];
+		var b=ar[2];
+		if(old == ''){
+			myModal(2,'请输入旧密码！',2000);
+		}else if(b == '' || b == null){
+			myModal(2,'请再次输入新密码！',2000)
+		}else if(a == '' || a == null){
+			myModal(2,'请输入新密码！',2000)
+		}else if(!reg.test(a) || !reg.test(b)){
+			myModal(2,'密码格式不正确,请重新输入！',2000);
+		}else if(a != b){
+			myModal(2,'密码不一致，请重新输入!',2000);
+		}else{
+			$.ajax({
+				type: "GET",
+				url: '../cgi-bin/password.cgi',
+				data: {
+					username: 'admin',
+					password: a,
+					oldpassword:old,
+					para: window.localStorage.getItem('sessionid')         	
+				},
+				success: function (data){
+					if (data.status === 1) {
+						window.localStorage.setItem('PwdModified','1')
+						window.location.href = "webConfig.html";
+					} else {
+						myModal(2,'异常错误',2000);
+					}
 
-		                },
-		                error: function(error){
-		                    alert('返回错误信息：',error);
-		                }
-		            });
-	            }
+				},
+				error: function(error){
+					myModal(2,'网络异常，请稍后再试！',2000);
+				}
+			});
+		}
 
-	            //alert("old-pass:"+a+"new:"+b);
-	        });
 
-  		})
-  	</script>
+	});
+	$('#switcher').on('click',function(){
+		$('.switch-container').toggleClass('in')
+	})
+	$('#logout').on('click',function(){
+		$.get('../cgi-bin/logout.cgi',{
+			para: window.localStorage.getItem('sessionid')
+		},function(data){
+			if(data.msg == 'success'){
+				window.localStorage.removeItem('sessionid')
+				window.location.href = '/'
+			}
+		})
+	})
+})
+</script>
 </body>
 </html>

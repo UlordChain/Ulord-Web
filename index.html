@@ -10,23 +10,33 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
+    <div class="modal fade bd-example-modal-sm"  id="myModal" role="dialog" data-backdrop="false"  aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <p class="text-center mb-0">
+                    <i class="fa fa-check-circle text-success mr-1" aria-hidden="true"></i>
+                    <span class="content">提交成功</span>
+                </p>
+            </div>
+        </div>
+    </div>
     <div class="web-container">
         <div class="form-bg login">
-                <div class="container container2">
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-6">
-                            <form class="form-horizontal">
-                                <span class="heading">Ulord主节点管理后台</span>
-                                <div class="form-group user">
-                                    <input type="text" class="form-control" id="username" placeholder="用户名" value="admin" readonly="readonly">
-                                    <i class="fa fa-user"></i>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="defaultPwd" maxlength="20" placeholder="密　码" value="admin">
-                                    <i class="fa fa-lock"></i>
-                                    <!-- <a href="javascript:alert('登陆后，会进入修改密码界面');" class="fa fa-question-circle"></a> -->
-                                </div>
-                                <div class="form-group help">
+            <div class="container container2">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-6">
+                        <form class="form-horizontal">
+                            <span class="heading">Ulord主节点管理后台</span>
+                            <div class="form-group user">
+                                <input type="text" class="form-control" id="username" placeholder="用户名" value="admin" readonly="readonly">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="defaultPwd" minlength="8" maxlength="20" placeholder="密码">
+                                <i class="fa fa-lock"></i>
+                                <!-- <a href="javascript:alert('登陆后，会进入修改密码界面');" class="fa fa-question-circle"></a> -->
+                            </div>
+                            <div class="form-group help">
                                     <!-- <div class="main-checkbox">
                                         <input type="checkbox" value="None" id="checkbox1" name="check"/>
                                         <label for="checkbox1"></label>
@@ -39,31 +49,46 @@
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script>
-     $(function(){
-        function fPostData(){
-            var user = $('#username').val();
-            var pwd = $('#defaultPwd').val();
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+           $(function(){
+            function myModal(label,text){
+                var collection = 'fa-check-circle text-success fa-exclamation-circle text-warning fa-times-circle text-danger'
+                if(label==1){
+                    $('#myModal .modal-content .fa').removeClass(collection).addClass('fa-check-circle text-success')
+                }else if(label==0){
+                    $('#myModal .modal-content .fa').removeClass(collection).addClass('fa-exclamation-circle text-warning')
+                }else if(label==2){
+                    $('#myModal .modal-content .fa').removeClass(collection).addClass('fa-times-circle text-danger')
+                }
+                $('#myModal .content').html(text);
+                $('#myModal').modal('show')
+                setTimeout(function(){
+                    $('#myModal').modal('hide')
+                }, 10000)
+            }
+            function fPostData(){
+                var user = $('#username').val();
+                var pwd = $('#defaultPwd').val();
             //alert('本机输入的用户名是:'+user+',密码是:'+pwd);
             $.ajax({
                 type: "GET",
                 url: '../cgi-bin/login.cgi',
                 data: 'name='+user+'&pwd='+pwd,
                 success: function (data){
-                        if (data.status === 1) {
-                            window.localStorage.setItem('sessionid',data.sessionid)
-                            if($('#defaultPwd').val() === 'admin'){
-                                window.location.href = "resetPwd.html";
-                            }else {
-                                window.location.href = 'webConfig.html'
-                            }
-                        } else {
-                            alert('第一次使用默认密码登录或密码错误');
+                    if (data.status === 1) {
+                        window.localStorage.setItem('sessionid',data.sessionid)
+                        if($('#defaultPwd').val() === 'admin'){
+                            window.location.href = "webConfig.html?type=1";
+                        }else {
+                            window.location.href = 'webConfig.html'
                         }
+                    } else {
+                        alert('第一次使用默认密码登录或密码错误');
+                    }
 
                 },
                 error: function(error){
@@ -71,14 +96,17 @@
                 }
             });
         }
-        if(window.localStorage.getItem('PwdModified')!==''){
-            $('#defaultPwd').val('')
-        }
+        
         $('#submit').on('click', function() {
-            fPostData();
+            if($('#defaultPwd').val().match(/^(?=.*[A-Za-z])(?=.*\d)[^]{8,20}$/)){
+                fPostData();
+            }else {
+                myModal(2,'密码必须大于8位，包含数字和字母!')
+            }
+            
         })
 
-     })
-    </script>
+    })
+</script>
 </body>
 </html>

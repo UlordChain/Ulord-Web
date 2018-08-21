@@ -9,7 +9,12 @@ body {
 	height: 100%;
 	font-family:"Microsoft YaHei","Segoe UI","Lucida Grande",Helvetica,Arial,sans-serif;
 }
-
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+}
 *{
 	margin: 0;
 	margin: 0;
@@ -52,15 +57,18 @@ a,a:visited,a:hover,a:active,a:focus {
     text-align:left;
     margin-right:-4px;
 }
-
-.form-bg {
+.switch-container.in .form-bg {
+	left: 18%;
+} 
+.form-bg{
 	background: #eee;
     position: fixed;
     top:0;
-    left:0;
+    left:0%;
     right:0;
     bottom:0;
     text-align: center;
+    transition: .5s ease-in-out all;
 }
 .login .user input:hover {
 	cursor: not-allowed;
@@ -358,6 +366,16 @@ a,a:visited,a:hover,a:active,a:focus {
 	left: 50%;
 	transform: translateX(-50%);
 }
+#myModal .modal-dialog {
+	margin-top:30px;
+	margin-bottom:0;
+}
+#resetPwd .modal-dialog, #confirm .modal-dialog,#alert .modal-dialog {
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
 
 @media only screen and (max-width: 767px){
 	.title2 {
@@ -457,3 +475,14 @@ a,a:visited,a:hover,a:active,a:focus {
 	line-height: 60px;
 }
 /*左导航栏*/
+.red {
+	color:red;
+}
+.Pwd-tips {
+	color:red;
+	padding: 10px;
+}
+.formatedDate {
+	height: 40px;
+	line-height: 40px;
+}
