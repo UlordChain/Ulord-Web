@@ -9,16 +9,16 @@ $(function(){
 		var old = ar[0];
 		var a=ar[1];
 		var b=ar[2];
-		if(a == '' || a == null){
-			alert('请输入新密码！');
+		if(old == ''){
+			myModal(2,'请输入旧密码！',2000);
+		}else if(a == '' || a == null){
+			myModal(2,'请输入新密码！',2000)
 		}else if(b == '' || b == null){
-			alert('请再次输入新密码！')
-		}else if(old == ''){
-			alert('请输入旧密码！')
-		}else if(!reg.test(a) || !reg.test(b)){
-			alert('密码格式不正确,请重新输入！');
+			myModal(2,'请再次输入新密码！',2000)
+		}else if(!reg.test(a) || !reg.test(b) || !reg.test(old)){
+			myModal(2,'密码格式不正确,请重新输入！',2000);
 		}else if(a != b){
-			alert('密码不一致，请重新输入!');
+			myModal(2,'密码不一致，请重新输入!',2000);
 		}else{
 			$.ajax({
 				type: "GET",
@@ -34,12 +34,12 @@ $(function(){
 						window.localStorage.setItem('PwdModified','1')
 						window.location.href = "webConfig.html";
 					} else {
-						alert('异常错误');
+						myModal(2,'异常错误！',2000);
 					}
 
 				},
 				error: function(error){
-					alert('返回错误信息：',error);
+					myModal(2,'网络异常，请稍后再试！',2000);
 				}
 			});
 		}
@@ -53,7 +53,7 @@ $(function(){
 	function validateInput(){
 		var alertField = '';
 		var required = /.{1,}/;
-		var ip = /((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))/
+		var ip = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
 		var getLength = GetLength = function(str){
    		 	return str.replace(/[^\x00-\xff]/g,"aa").length;
 		}
@@ -120,7 +120,7 @@ $(function(){
 			data:{					
 				rpcuser:$('#rpcName').val(),
 				rpcpassword:$('#rpcPwd').val(),
-				masternode:$('#featureCode').val(),
+				masternodeprivkey:$('#featureCode').val(),
 				addnode:$('#addIp').val(),
 				certificate:$('#version').val(),
 				collateraloutputindex:$('#txIndex').val(),
@@ -144,7 +144,7 @@ $(function(){
 				}
 			},
 			error: function(error){
-				console.log('error', error);
+				myModal(2,'网络异常，请稍后再试！',2000);
 			}
 		})
 	}
@@ -164,14 +164,14 @@ $(function(){
 
 								setTimeout(function(){
 									$('#myModal').modal('hide')
-								},10000)
+								},5000)
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
 							}
 						},
 						error:function(err,text){
-							alert('error:',text)
+							myModal(2,'网络异常，请稍后再试！',2000);
 						}
 					})
 				}else if(code == 2){
@@ -179,7 +179,7 @@ $(function(){
 						type:'GET',
 						url:'../cgi-bin/stopnode.cgi?para='+window.localStorage.getItem('sessionid'),
 						success:function(data){
-							if(data.masternode =='stop'){
+							if(data.ulord =='stop'){
 								$('#confirm').modal('hide')
 								$('#myModal .modal-content .fa').removeClass('fa-check-circle text-success').addClass('fa-exclamation-circle text-danger')
 								$('#myModal .content').html('正在关闭主节点，这需要几分钟，请根据主节点信号灯判断是否关闭！');
@@ -187,14 +187,14 @@ $(function(){
 								mainNodeStatus.status = 3
 								setTimeout(function(){
 									$('#myModal').modal('hide')
-								},10000)
+								},5000)
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
 							}
 						},
 						error:function(err,text){
-							alert('error',text)
+							myModal(2,'网络异常，请稍后再试！',2000);
 						}
 
 					})
@@ -213,7 +213,7 @@ $(function(){
 			// 循环获取状态
 			function getStatus(){
 				if(mainNodeStatus.prevStatus.timestamp && Date.now()-mainNodeStatus.prevStatus.timestamp>5000){
-							myModal(2,'与主节点通信不稳定，请稍后再试')
+							myModal(2,'与主节点通信不稳定，请稍后再试',2000)
 				}
 				$.get('../cgi-bin/status.cgi',{
 					para: window.localStorage.getItem('sessionid')
@@ -237,14 +237,14 @@ $(function(){
 							$('.checked-switch').prop('checked',true)
 							mainNodeStatus.status = 2
 							if(mainNodeStatus.operation==1){
-								myModal(1,'主节点启动成功')
+								myModal(1,'主节点启动成功',5000)
 								mainNodeStatus.operation =0
 							}
 						}else if(data.ulord=='stop' && statusChanged){
 							$('.checked-switch').prop('checked',false)
 							mainNodeStatus.status = 0
 							if(mainNodeStatus.operation==2){
-								myModal(1,'主节点关闭成功')
+								myModal(1,'主节点关闭成功',5000)
 								mainNodeStatus.operation = 0
 							}
 						}
@@ -264,7 +264,8 @@ $(function(){
 					}
 				})
 			}
-			setInterval(getStatus,500)
+			setInterval(getStatus,5000)
+			getStatus()
 
 
 			$('.checked-switch').on('click',function(e){
@@ -304,7 +305,7 @@ $(function(){
 					if(data.session!=="failed"){
 						$('#rpcName').val(data.rpcuser)	/* RPC账号*/
 						$('#rpcPwd').val(data.rpcpassword) /* RPC密码*/
-						$('#featureCode').val(data.masternode) /* 主节点的特征码*/
+						$('#featureCode').val(data.masternodeprivkey) /* 主节点的特征码*/
 						$('#addIp').val(data.addnode)	/* 额外的同步节点*/
 						$('#version').val(data.certifiversion) /* 证书版本*/
 						$('#txIndex').val(data.collateraloutputindex) /* 交易索引*/
@@ -321,7 +322,7 @@ $(function(){
 					
 				},
 				error: function(error,txt){
-					console.log('返回错误信息：',error.textStatus);
+					myModal(2,'网络异常，请稍后再试！',2000);
 				}
 			})
 			$('#submitConfig').on('click', function() {
@@ -330,6 +331,12 @@ $(function(){
 				}
 				
 			})
+			$(document).on('keypress',function(e){
+            var keyCode = e.keyCode || e.which
+            if(keyCode==13){
+                $('#submitConfig').trigger('click')
+            }
+       		})
 			// 导航栏
 			$('#switcher').on('click',function(){
 				$('.switch-container').toggleClass('in')

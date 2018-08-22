@@ -86,7 +86,13 @@
 			$('#myModal').modal('hide')
 		}, time)
 	}
-	var reg=/^[0-9a-zA-Z]+$/;
+	$(document).on('keypress',function(e){
+            var keyCode = e.keyCode || e.which
+            if(keyCode==13){
+                $('#submit').trigger('click')
+            }
+        })
+	var reg=/^(?=.*[A-Za-z])(?=.*\d)[^]{8,20}$/;
 	$('#submit').click(function(){
 		var ar=[];
 		$('input[type=password]').each(function(){
@@ -97,11 +103,11 @@
 		var b=ar[2];
 		if(old == ''){
 			myModal(2,'请输入旧密码！',2000);
-		}else if(b == '' || b == null){
-			myModal(2,'请再次输入新密码！',2000)
 		}else if(a == '' || a == null){
 			myModal(2,'请输入新密码！',2000)
-		}else if(!reg.test(a) || !reg.test(b)){
+		}else if(b == '' || b == null){
+			myModal(2,'请再次输入新密码！',2000)
+		}else if(!reg.test(a) || !reg.test(b) || !reg.test(old)){
 			myModal(2,'密码格式不正确,请重新输入！',2000);
 		}else if(a != b){
 			myModal(2,'密码不一致，请重新输入!',2000);

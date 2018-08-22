@@ -32,6 +32,7 @@ input[type="number"]{
 ul {
 	margin:0;
 	list-style-type: none;
+	padding: 0;
 }
 a,a:visited,a:hover,a:active,a:focus {
 	text-decoration: none;
@@ -68,7 +69,7 @@ a,a:visited,a:hover,a:active,a:focus {
     right:0;
     bottom:0;
     text-align: center;
-    transition: .5s ease-in-out all;
+    transition: .3s ease-in-out all;
 }
 .login .user input:hover {
 	cursor: not-allowed;
@@ -364,6 +365,7 @@ a,a:visited,a:hover,a:active,a:focus {
 	right:auto;
 	bottom:auto;
 	left: 50%;
+	width: auto;
 	transform: translateX(-50%);
 }
 #myModal .modal-dialog {
@@ -406,9 +408,12 @@ a,a:visited,a:hover,a:active,a:focus {
 }
 .switch-container .nav-left {
 	background-color: rgba(0, 21, 41, 1);
-	transition: .5s ease-in-out all;
+	transition: .3s ease-in-out all;
 	height: 100%;
 	width: 0%;
+}
+.switch-container .nav-left {
+
 }
 .switch-container.in .nav-left {
 	width: 18%;
@@ -421,7 +426,7 @@ a,a:visited,a:hover,a:active,a:focus {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	transition: .5s ease-in-out all;
+	transition: .3s ease-in-out all;
 	
 }.switch-container .form-container .form-config {
 	height:100%;
@@ -438,7 +443,7 @@ a,a:visited,a:hover,a:active,a:focus {
 	line-height: 60px;
 }
 .switch-container .nav-left ul {
-	padding-left: 20%;
+	text-align: center;
 	width: 100%;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -486,3 +491,18 @@ a,a:visited,a:hover,a:active,a:focus {
 	height: 40px;
 	line-height: 40px;
 }
+
+/*confirm模态框自定义*/
+#confirm .modal-header .modal-title{
+	text-align: left;
+}
+#confirm .modal-header {
+	border-bottom:none;
+}
+#confirm .modal-footer {
+	border-top:none;
+}
+.fa.fa-exclamation-circle {
+	color:yellow;
+}
+/*confirm模态框自定义*/

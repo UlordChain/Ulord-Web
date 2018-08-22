@@ -55,7 +55,8 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
            $(function(){
-            function myModal(label,text){
+            function myModal(label,text,time){
+                time = time || 10000
                 var collection = 'fa-check-circle text-success fa-exclamation-circle text-warning fa-times-circle text-danger'
                 if(label==1){
                     $('#myModal .modal-content .fa').removeClass(collection).addClass('fa-check-circle text-success')
@@ -68,7 +69,7 @@
                 $('#myModal').modal('show')
                 setTimeout(function(){
                     $('#myModal').modal('hide')
-                }, 10000)
+                }, time)
             }
             function fPostData(){
                 var user = $('#username').val();
@@ -87,21 +88,26 @@
                             window.location.href = 'webConfig.html'
                         }
                     } else {
-                        alert('第一次使用默认密码登录或密码错误');
+                        myModal(2,'第一次使用默认密码登录或密码错误',2000)
                     }
 
                 },
-                error: function(error){
-                    alert('返回错误信息：' + error);
+                error: function(error,text){
+                    myModal(2,'返回错误信息：' + text,2000)
                 }
             });
         }
-        
+        $(document).on('keypress',function(e){
+            var keyCode = e.keyCode || e.which
+            if(keyCode==13){
+                $('#submit').trigger('click')
+            }
+        })
         $('#submit').on('click', function() {
             if($('#defaultPwd').val().match(/^(?=.*[A-Za-z])(?=.*\d)[^]{8,20}$/)){
                 fPostData();
             }else {
-                myModal(2,'密码必须大于8位，包含数字和字母!')
+                myModal(2,'密码必须大于8位，包含数字和字母!',2000)
             }
             
         })
