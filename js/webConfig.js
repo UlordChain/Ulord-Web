@@ -15,8 +15,8 @@ $(function(){
 			myModal(2,'请输入新密码！',2000)
 		}else if(b == '' || b == null){
 			myModal(2,'请再次输入新密码！',2000)
-		}else if(!reg.test(a) || !reg.test(b) || !reg.test(old)){
-			myModal(2,'新密码格式不正确,请重新输入8-20位混合密码！',2000);
+		}else if(!reg.test(a) || !reg.test(b)){
+			myModal(2,'新密码格式不正确,请重新输入8-20位的混合密码！',2000);
 		}else if(a != b){
 			myModal(2,'密码不一致，请重新输入!',2000);
 		}else{
@@ -159,24 +159,32 @@ $(function(){
 						url:'../cgi-bin/startnode.cgi?para='+window.localStorage.getItem('sessionid'),
 						success:function(data){
 							if(data.ulord =='start'){
-								
+								// $('#confirm').modal('hide')
+								// $('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
+								// $('#myModal').modal('show')
+								// mainNodeStatus.status = 1
+
+								// setTimeout(function(){
+								// 	$('#myModal').modal('hide')
+								// },5000)
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
 							}
 						},
 						error:function(err,text){
-							myModal(2,'网络异常，请稍后再试！',2000);
+							// myModal(2,'网络异常，请稍后再试！',2000);
 						}
 					})
 					$('#confirm').modal('hide')
 								$('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
 								$('#myModal').modal('show')
 								mainNodeStatus.status = 1
-
+								
+								$('#rpcName,#rpcPwd').attr('readonly',true)
 								setTimeout(function(){
 									$('#myModal').modal('hide')
-					},5000)
+								},5000)
 				}else if(code == 2){
 					$.ajax({
 						type:'GET',
@@ -188,6 +196,7 @@ $(function(){
 								$('#myModal .content').html('正在关闭主节点，这需要几分钟，请根据主节点信号灯判断是否关闭！');
 								$('#myModal').modal('show')
 								mainNodeStatus.status = 3
+								$('#rpcName,#rpcPwd').attr('readonly',true)
 								setTimeout(function(){
 									$('#myModal').modal('hide')
 								},5000)
@@ -239,6 +248,7 @@ $(function(){
 						if(data.ulord=='start' && statusChanged){
 							$('.checked-switch').prop('checked',true)
 							mainNodeStatus.status = 2
+							$('#rpcName,#rpcPwd').attr('readonly',true)
 							if(mainNodeStatus.operation==1){
 								myModal(1,'主节点启动成功',5000)
 								mainNodeStatus.operation =0
@@ -246,6 +256,7 @@ $(function(){
 						}else if(data.ulord=='stop' && statusChanged){
 							$('.checked-switch').prop('checked',false)
 							mainNodeStatus.status = 0
+							$('#rpcName,#rpcPwd').attr('readonly',false)
 							if(mainNodeStatus.operation==2){
 								myModal(1,'主节点关闭成功',5000)
 								mainNodeStatus.operation = 0
