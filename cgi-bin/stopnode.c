@@ -60,11 +60,11 @@ int cgiMain()
     DEBUGINFO("stopnode cmd end\n");
 	if(ret>0)
 	{ 
-	    fprintf(cgiOut,"{\"masternode\":\"stop\",\"status\":1}");
+	    fprintf(cgiOut,"{\"ulord\":\"stop\",\"status\":1}");
 	}
 	else
 	{
-	    fprintf(cgiOut,"{\"masternode\":\"stop\",\"status\":0}");
+	    fprintf(cgiOut,"{\"ulord\":\"stop\",\"status\":0}");
 	}
  
 	return 0;

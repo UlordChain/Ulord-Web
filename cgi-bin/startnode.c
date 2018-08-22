@@ -51,11 +51,11 @@ int cgiMain()
     DEBUGINFO("startnode cmd end\n");
     if(1)
     { 
-         fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":1}");
+         fprintf(cgiOut,"{\"ulord\":\"start\",\"status\":1}");
     }
 	else
 	{
-         fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":0}");
+         fprintf(cgiOut,"{\"ulord\":\"start\",\"status\":0}");
 	}
     
     int ret = startnode();
