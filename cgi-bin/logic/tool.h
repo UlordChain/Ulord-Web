@@ -9,7 +9,6 @@
 
 
 typedef   unsigned   char   byte;
-#pragma pack(1)
 
 typedef struct
 {
@@ -80,7 +79,6 @@ typedef struct
 }DEV_CFG ;
 
 
-#pragma pack()
 void  get_cfg_path(char *);
 
 void  get_ulord_path(char *);

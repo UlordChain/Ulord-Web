@@ -92,12 +92,18 @@ void   readdev(DEV_CFG *  pDevData)
     read_profile_string_nosection("rpcuser",pDevData->rpcuser,sizeof(pDevData->rpcuser),NULL,DEV_FILE);
     read_profile_string_nosection("rpcpassword",pDevData->rpcpassword,sizeof(pDevData->rpcpassword),NULL,DEV_FILE);
     read_profile_string_nosection("addnode",pDevData->addnode,sizeof(pDevData->addnode),NULL,DEV_FILE);
+    DEBUGINFO2("readcfg addnode %s\n",pDevData->addnode);
+
     read_profile_string_nosection("externalip",pDevData->externalip,sizeof(pDevData->externalip),NULL,DEV_FILE);
+
+    memset(temp,0,sizeof(temp));
     read_profile_string_nosection("masternode",temp,sizeof(temp),NULL,DEV_FILE);
     pDevData->masternode = atoi(temp);
     DEBUGINFO2("readcfg masternode %d\n",pDevData->masternode);
 
     read_profile_string_nosection("masternodeprivkey",pDevData->masternodeprivkey,sizeof(pDevData->masternodeprivkey),NULL,DEV_FILE);
+    DEBUGINFO2("readcfg masternodeprivkey %s\n",pDevData->masternodeprivkey);
+     
     read_profile_string_nosection("certifiversion",temp,sizeof(temp),NULL,DEV_FILE);
 
     pDevData->certifiversion= atoi(temp);
@@ -106,7 +112,7 @@ void   readdev(DEV_CFG *  pDevData)
     read_profile_string_nosection("certifiperiod",temp,sizeof(temp),NULL,DEV_FILE);
     pDevData->certifiperiod  = atoi(temp);
 
-    DEBUGINFO2("readcfg masternode %d\n",pDevData->masternode);
+    DEBUGINFO2("readcfg certifiperiod%d\n",pDevData->certifiperiod);
 
     read_profile_string_nosection("certificate",pDevData->certificate,sizeof(pDevData->certificate),NULL,DEV_FILE);
     read_profile_string_nosection("uctpubkey1",pDevData->uctpubkey1,sizeof(pDevData->uctpubkey1),NULL,DEV_FILE);
