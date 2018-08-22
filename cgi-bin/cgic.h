@@ -39,7 +39,7 @@ extern char *cgiAccept;
 extern char *cgiUserAgent;
 extern char *cgiReferrer;
 
-#define  LOG_DIR_TRUNCATE  8
+#define  LOG_DIR_TRUNCATE  18
 
 #define CGICDEBUG  1
 #ifdef  CGICDEBUG

@@ -206,7 +206,7 @@ void   get_cfg_path( char * buffile )
     memset(file_path,0,sizeof(file_path));
     getcwd(file_path,100);
     file_path[strlen(file_path)-LOG_DIR_TRUNCATE]=0;
-    sprintf(buffile, "%s/www/user.data" , file_path );
+    sprintf(buffile, "%s/Ulord-Web/user.data" , file_path );
 
 }
 
@@ -217,7 +217,7 @@ void   get_appkey_path( char * buffile )
    memset(file_path,0,sizeof(file_path));
    getcwd(file_path,100);
    file_path[strlen(file_path)-LOG_DIR_TRUNCATE]=0;
-   sprintf(buffile, "%s/www/appkey.data" , file_path );
+   sprintf(buffile, "%s/Ulord-Web/appkey.data" , file_path );
 
 }
 

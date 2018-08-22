@@ -57,7 +57,7 @@ int cgiMain()
 	   	fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
 	  } 
       fprintf(cgiOut,"}");
-      //DEBUGINFO2("status ulord is run , masternode is %d\n",ret);
+      DEBUGINFO2("status ulord is run , masternode is %d\n",ret);
     }
     else
     {
@@ -66,7 +66,7 @@ int cgiMain()
 	  fprintf(cgiOut,"\"masternode\":\"stop\",\"status\":0");
 	  fprintf(cgiOut,"}");
 
-       // DEBUGINFO("status ulord is disenableed , masternode is disenable\n");
+       DEBUGINFO("status ulord is disenableed , masternode is disenable\n");
 	
     }
  
@@ -75,27 +75,20 @@ int cgiMain()
 
 int querypid()
 {
-	char *pdata = "ulordd";
 	char cmd[128] = { 0 };
 	char buff[1024] = { 0 };
-	int pid;
+	int pid=0;
 	FILE *fstream = NULL;
 	memset(buff, 0, sizeof(buff));
 
  
 	//pdata = getenv("QUERY_STRING");
-	if (pdata == NULL)
 	{
- 
-		return 0;
-	}
-	else 
-	{
-            sprintf(cmd, "ps -e -o pid,comm | grep %s | grep -v PID | grep -v grep | awk '{print $1}'", pdata);
+        sprintf(cmd, "ps -e -o pid,comm | grep ulordd | grep -v PID | grep -v grep | awk '{print $1}'");
 		if (NULL == (fstream = popen(cmd, "r")))
 		{
 			//fprintf(stderr, "execute command failed: %s", strerror(errno));
-			return -1;
+			return 0;
 		}
 		while (NULL != fgets(buff, sizeof(buff), fstream)) 
 		{
@@ -107,6 +100,7 @@ int querypid()
 			}
 		}
 		pclose(fstream);
+        DEBUGINFO2("status ulord is run pid  %d\n",pid);
 		return pid;
 	}
 }
