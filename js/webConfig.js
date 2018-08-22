@@ -83,6 +83,8 @@ $(function(){
 			alertField = '交易索引'
 		}else if(!(addIp.match(ip) || addIp=='')){
 			alertField = '额外增加的同步节点'
+		}else if(timestamp.length>10 || !timestamp.match(/^\d{0,10}$/)){
+			alertField = '证书到期日期'
 		}else {
 			return true
 		}
