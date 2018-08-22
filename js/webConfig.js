@@ -1,6 +1,6 @@
 $(function(){
 	// 修改密码弹窗，仅限第一次未修改过密码
-	var reg=/^[0-9a-zA-Z]+$/;
+	var reg=/^(?=.*[A-Za-z])(?=.*\d)[^]{8,20}$/;
 	$('#submit').click(function(){
 		var ar=[];
 		$('#resetPwd input[type=password]').each(function(){
@@ -16,7 +16,7 @@ $(function(){
 		}else if(b == '' || b == null){
 			myModal(2,'请再次输入新密码！',2000)
 		}else if(!reg.test(a) || !reg.test(b) || !reg.test(old)){
-			myModal(2,'密码格式不正确,请重新输入！',2000);
+			myModal(2,'密码格式不正确,请重新输入8-20位混合密码！',2000);
 		}else if(a != b){
 			myModal(2,'密码不一致，请重新输入!',2000);
 		}else{
