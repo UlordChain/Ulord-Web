@@ -1,18 +1,3 @@
-# ulord  web config project. 
-
-* ulord depend lib should put /usr/lib
-
-About web
--------------
-
-This web site is composed of a completely static structure,No modularization, no build tool.
-
-
-***
-
-## Ubuntu配置boa
-boa是一个web服务器，注意本文是在root权限操作的，如果不是root记得把相应文件更改权限，例如可以用”chmod -R 777 文件”下面说明安装步骤：
-
 ## **About CGI interface description**
 
 When logging in, the page needs to save sessionid,and the sessionid does not match,returns error.  
