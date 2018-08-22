@@ -40,6 +40,12 @@ int cgiMain()
         return 0;
     }
 	
+    char *home;
+    home = getenv("HOME");
+    setenv("HOME","/root",1);
+    home = getenv("HOME");
+
+
     cgiHeaderContentType("application/json");
     int ret = querypid();
     if(ret>0)
