@@ -75,6 +75,6 @@ method: GET
     }
 
 ### 退出登录
-请求方法：  
+请求方法： 
 url: /cgi-bin/logout.cgi  
 method: GET
