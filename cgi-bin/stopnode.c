@@ -48,10 +48,10 @@ int cgiMain()
      
     char *home;
     home = getenv("HOME");
-    setenv("HOME","/home/ulord",1);
+    setenv("HOME","/root",1);
     home = getenv("HOME");
 
-	cgiHeaderContentType("application/json");
+    cgiHeaderContentType("application/json");
     
 //	int ret = stopnode2();
    int   ret = stopnode();

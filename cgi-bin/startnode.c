@@ -42,7 +42,7 @@ int cgiMain()
 
     char *home;
     home = getenv("HOME");
-    setenv("HOME","/home/ulord",1);
+    setenv("HOME","/root",1);
     home = getenv("HOME");
 
     cgiHeaderContentType("application/json");
@@ -69,7 +69,7 @@ int startnode()
 	char cmd[128] = { 0 };
 	int pid;
  
-    sprintf(cmd,"/home/ulord/bin/ulordd & ");
+    sprintf(cmd,"ulordd & ");
     return  system(cmd);
 }
 
