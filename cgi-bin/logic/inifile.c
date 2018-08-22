@@ -301,7 +301,7 @@ static int parse_file(const char *section, const char *key, const char *buf,int 
 						while(j < i && p[j] != '=') {
 							j++;
 							if('=' == p[j]) {
-								if(strncmp(key,p+newline_start,j-newline_start)==0)
+								if(strlen(key)==(j-newline_start) &&strncmp(key,p+newline_start,j-newline_start)==0)
 								{
 									//find the key ok
 									*key_s = newline_start;

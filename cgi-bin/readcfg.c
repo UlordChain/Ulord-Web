@@ -60,6 +60,7 @@ int cgiMain()
     fprintf(cgiOut,"\"msg\":\"success\",\"status\":1,");
     fprintf(cgiOut,"\"rpcuser\":\"%s\",",devData.rpcuser  );
     fprintf(cgiOut,"\"rpcpassword\":\"%s\",",devData.rpcpassword  );
+    fprintf(cgiOut,"\"addnode\":\"%s\",",devData.addnode);
     fprintf(cgiOut,"\"externalip\":\"%s\",",devData.externalip  );
     fprintf(cgiOut,"\"masternode\":\"%d\",",devData.masternode  );
     fprintf(cgiOut,"\"masternodeprivkey\":\"%s\",",devData.masternodeprivkey  );
@@ -115,7 +116,10 @@ void   readdev(DEV_CFG *  pDevData)
     DEBUGINFO2("readcfg certifiperiod%d\n",pDevData->certifiperiod);
 
     read_profile_string_nosection("certificate",pDevData->certificate,sizeof(pDevData->certificate),NULL,DEV_FILE);
-    read_profile_string_nosection("uctpubkey1",pDevData->uctpubkey1,sizeof(pDevData->uctpubkey1),NULL,DEV_FILE);
+    char uctpub[20]={0};
+
+    sprintf(uctpub,"uctpubkey%d",pDevData->certifiversion);
+    read_profile_string_nosection(uctpub,pDevData->uctpubkey1,sizeof(pDevData->uctpubkey1),NULL,DEV_FILE);
     DEBUGINFO2("readcfg uctpubkey1 %s \n",pDevData->uctpubkey1);
     read_profile_string_nosection("broadcastsign",pDevData->broadcastsign,sizeof(pDevData->broadcastsign),NULL,DEV_FILE);
     read_profile_string_nosection("alias",pDevData->alias,sizeof(pDevData->alias),NULL,DEV_FILE);

@@ -200,8 +200,10 @@ void writedev(DEV_CFG * pDevData)
 
         DEBUGINFO2(" writedev writedev   %s \n", pDevData->certificate);
 
+        char uctpubkey[20]={0};
+        sprintf(uctpubkey,"uctpubkey%d", pDevData->certifiversion);
 	if(pDevData->uctpubkey1[0]!=0)
-	    write_profile_string_nosection("uctpubkey1",pDevData->uctpubkey1,DEV_FILE);
+	    write_profile_string_nosection(uctpubkey,pDevData->uctpubkey1,DEV_FILE);
 	if(pDevData->broadcastsign[0]!=0)
 	   write_profile_string_nosection("broadcastsign",pDevData->broadcastsign,DEV_FILE);
 	if(pDevData->uctpubkey1[0]!=0)
