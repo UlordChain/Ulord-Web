@@ -21,8 +21,8 @@ boa是一个web服务器，注意本文是在root权限操作的，如果不是r
 
     $ vim compat.h 
 
-找到 #define TIMEZONE_OFFSET（foo）foo##->tm_gmtoff  
-修改成 #define TIMEZONE_OFFSET（foo）(foo)->tm_gmtoff
+找到 `#define TIMEZONE_OFFSET（foo）foo##->tm_gmtoff`  
+修改成 `#define TIMEZONE_OFFSET（foo）(foo)->tm_gmtoff`
 
 ### 6.修改boa.c ,注释掉以下几行：    
 
