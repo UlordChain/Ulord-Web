@@ -159,14 +159,7 @@ $(function(){
 						url:'../cgi-bin/startnode.cgi?para='+window.localStorage.getItem('sessionid'),
 						success:function(data){
 							if(data.ulord =='start'){
-								$('#confirm').modal('hide')
-								$('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
-								$('#myModal').modal('show')
-								mainNodeStatus.status = 1
-
-								setTimeout(function(){
-									$('#myModal').modal('hide')
-								},5000)
+								
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
@@ -176,6 +169,14 @@ $(function(){
 							myModal(2,'网络异常，请稍后再试！',2000);
 						}
 					})
+					$('#confirm').modal('hide')
+								$('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
+								$('#myModal').modal('show')
+								mainNodeStatus.status = 1
+
+								setTimeout(function(){
+									$('#myModal').modal('hide')
+					},5000)
 				}else if(code == 2){
 					$.ajax({
 						type:'GET',
