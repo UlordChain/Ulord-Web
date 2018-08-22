@@ -347,7 +347,11 @@ a,a:visited,a:hover,a:active,a:focus {
 	height: 80px;
 	max-height: 80px;
 }
-
+.form-box .subtit {
+	color: #666;
+    padding-top: 5px;
+    display: inline-block;
+}
 
 
 

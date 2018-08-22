@@ -57,34 +57,37 @@ $(function(){
 		var getLength = GetLength = function(str){
    		 	return str.replace(/[^\x00-\xff]/g,"aa").length;
 		}
-		var isNumber=/^\d{1,}$/
-		var rpcName = $('#rpcName').val()
-		var rpcPwd = $('#rpcPwd').val()
-		var ipAddress = $('#ipAddress').val()
-		var nodeSign = $('#nodeSign').val()
-		var featureCode = $('#featureCode').val()
-		var txHash = $('#txHash').val()
-		var txIndex = $('#txIndex').val()
-		var addIp = $('#addIp').val()
-		var timestamp = $('#timestamp').val()
+		var isNumber=/^\d{1,}$/;
+		var rpcName = $('#rpcName').val();
+		var rpcPwd = $('#rpcPwd').val();
+		var ipAddress = $('#ipAddress').val();
+		var nodeSign = $('#nodeSign').val();
+		var featureCode = $('#featureCode').val();
+		var txHash = $('#txHash').val();
+		var txIndex = $('#txIndex').val();
+		var addIp = $('#addIp').val();
+		var timestamp = $('#timestamp').val();
+		var certificate = $('#certificate').val();
+		var version = $('#version').val();
+		var publicKey = $('#publicKey').val();
 		if(!(rpcName.match(required) && getLength(rpcName) <= 200)){
-			alertField = 'RPC账号'
+			alertField = 'RPC账号';
 		}else if(!(rpcPwd.match(required) && getLength(rpcPwd) <= 200)){
-			alertField = 'RPC密码'
+			alertField = 'RPC密码';
 		}else if(!(ipAddress.match(required) && ipAddress.match(ip))){
-			alertField = '公网IP地址'
+			alertField = '公网IP地址';
 		}else if(!(nodeSign.match(required) && getLength(nodeSign) <= 200)){
-			alertField = '广播的主节点签名'
+			alertField = '广播的主节点签名';
 		}else if(!(featureCode.match(required) && getLength(featureCode) <= 200)){
-			alertField = '主节点特征码'
+			alertField = '主节点特征码';
 		}else if(!(txHash.match(required) && getLength(txHash) <= 200)){
-			alertField = '交易Hash'
+			alertField = '交易Hash';
 		}else if(!(txIndex.match(required))){
-			alertField = '交易索引'
-		}else if(!(addIp.match(ip) || addIp=='')){
-			alertField = '额外增加的同步节点'
-		}else if(timestamp.length>10 || !timestamp.match(/^\d{0,10}$/)){
-			alertField = '证书到期日期'
+			alertField = '交易索引';
+		}else if(!(addIp.match(ip) || addIp =='')){
+			alertField = '额外增加的同步节点';
+		}else if(!timestamp.match(/^\d{0,10}$/)){
+			alertField = '证书到期日期';
 		}else {
 			return true
 		}
@@ -124,7 +127,8 @@ $(function(){
 				rpcpassword:$('#rpcPwd').val(),
 				masternodeprivkey:$('#featureCode').val(),
 				addnode:$('#addIp').val(),
-				certificate:$('#version').val(),
+				certificate:$('#certificate').val(),
+				certifiversion:$('#version').val(),
 				collateraloutputindex:$('#txIndex').val(),
 				collateraloutputtxid:$('#txHash').val(),
 				externalip:$('#ipAddress').val(),
@@ -321,6 +325,7 @@ $(function(){
 						$('#rpcPwd').val(data.rpcpassword) /* RPC密码*/
 						$('#featureCode').val(data.masternodeprivkey) /* 主节点的特征码*/
 						$('#addIp').val(data.addnode)	/* 额外的同步节点*/
+						$('#certificate').val(data.certificate) /* 证书 */
 						$('#version').val(data.certifiversion) /* 证书版本*/
 						$('#txIndex').val(data.collateraloutputindex) /* 交易索引*/
 						$('#txHash').val(data.collateraloutputtxid)  /* 交易哈希*/

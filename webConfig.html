@@ -42,8 +42,8 @@
 						</div>
 					</div>
 					<div class="faq">
-						<span>填写配置须知：</span>
-						<a href="https://ulorder.one/doc" target="_blank">https://ulorder.one/doc</a>							
+						<span>配置帮助文档：</span>
+						<a href="https://github.com/UlordChain/Ulord-Web/blob/master/README.md" target="_blank">https://github.com/UlordChain/Ulord-Web/blob/master/README.md</a>							
 					</div>
 					<form class="form-horizontal form-box" role="form">
 						<h3>RPC设置<span>（必填）</span></h3>
@@ -51,12 +51,14 @@
 							<label for="rpcName" class="col-sm-3 control-label">RPC用户名：</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="rpcName" placeholder="请输入RPC用户名" required>
+								<span class="subtit">命令行访问的用户名，使用getinfo等命令需要配置此设置</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="rpcPwd" class="col-sm-3 control-label">RPC密码：</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="rpcPwd" placeholder="请输入RPC密码" required>
+								<span class="subtit">命令行访问的密码，使用getinfo等命令需要配置此设置</span>
 							</div>
 						</div>
 						<h3>主节点设置<span>（必填）</span></h3>
@@ -64,24 +66,28 @@
 							<label for="ipAddress" class="col-sm-3 control-label">公网IP：</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="ipAddress" placeholder="请输入公网IP" required>
+								<span class="subtit">主节点的IP地址，和此WEB页面的IP相同</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="nodeSign" class="col-sm-3 control-label">广播的主节点签名：</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" id="nodeSign" placeholder="请输入广播的主节点签名" required></textarea>
+								<textarea class="form-control" rows="3" id="nodeSign" maxlength="200" placeholder="请输入广播的主节点签名" required></textarea>
+								<span class="subtit">此签名来自轻钱包</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="featureCode" class="col-sm-3 control-label">主节点特征码：</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" id="featureCode" placeholder="请输入主节点特征码" required></textarea>
+								<textarea class="form-control" rows="3" id="featureCode" maxlength="200" placeholder="请输入主节点特征码" required></textarea>
+								<span class="subtit">绑定主节点时使用过此主节点特征码，通过Ulord桌面版钱包可以得到</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="txHash" class="col-sm-3 control-label">交易Hash：</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" id="txHash" placeholder="请输入交易Hash" required></textarea>
+								<textarea class="form-control" rows="3" id="txHash" maxlength="200" placeholder="请输入交易Hash" required></textarea>
+								<span class="subtit">通过区块浏览器查询10000UT的交易哈希</span>
 							</div>
 						</div>
 
@@ -92,6 +98,7 @@
 									<option>0</option>
 									<option>1</option>
 								</select>
+								<span class="subtit">通过区块浏览器查询1万UT的交易哈希对应的交易索引</span>
 							</div>
 						</div>
 
@@ -101,18 +108,21 @@
 							<label for="addIp" class="col-sm-3 control-label">额外增加的同步节点：</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="addIp" placeholder="请输入额外增加的同步节点IP">
+								<span class="subtit">增加一个额外的块数据同步节点</span>
 							</div>
-						  </div><!-- 
-						  <div class="form-group">
-						    <label for="nodeSign" class="col-sm-3 control-label">证书：</label>
+						</div>
+						<div class="form-group">
+						    <label for="certificate" class="col-sm-3 control-label">证书：</label>
 						    <div class="col-sm-9">
-						      <textarea class="form-control" rows="3" id="nodeSign" placeholder="请输入证书"></textarea>
+						      	<textarea class="form-control" rows="3" id="certificate" maxlength="200" placeholder="请输入证书"></textarea>
+								<span class="subtit">Ulord社区绑定主节点成功后会得到此证书</span>
 						    </div>
-						</div> -->
+						</div>
 						<div class="form-group">
 							<label for="timestamp" class="col-sm-3 control-label">证书到期日期：</label>
 								<div class="col-sm-6">								
-									<input type="text" class="form-control" id="timestamp" placeholder="请输入时间戳">
+									<input type="text" class="form-control" id="timestamp" maxlength="10" placeholder="请输入时间戳" onkeyup="value=value.replace(/[^\d]/g,'')">
+									<span class="subtit">Ulord社区绑定主节点成功后会得到此证书</span>
 								</div>
 								<div class="formatedDate col-sm-3" id="formatedDate">
 									
@@ -121,13 +131,15 @@
 						<div class="form-group">
 							<label for="version" class="col-sm-3 control-label">证书版本：</label>
 							<div class="col-sm-9">
-								<input type="number" class="form-control" id="version" placeholder="请输入证书版本">
+								<input type="number" class="form-control" id="version" maxlength="200" placeholder="请输入证书版本" onkeyup="value=value.replace(/[^1-9]/g,'')">
+								<span class="subtit">Ulord社区绑定主节点成功后会得到此证书版本</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="publicKey" class="col-sm-3 control-label">验证证书的公钥：</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" id="publicKey" placeholder="请输入验证证书的公钥"></textarea>
+								<textarea class="form-control" rows="3" id="publicKey" maxlength="200" placeholder="请输入验证证书的公钥"></textarea>
+								<span class="subtit">一个固定的公钥，Ulord社区绑定主节点成功后会得到此证书的公钥</span>
 							</div>
 						</div>
 
