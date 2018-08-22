@@ -125,9 +125,14 @@ int  get_dev_cfg(DEV_CFG * pDevData )
 	{
 	}	
         DEBUGINFO2("get certificate success   %s \n", pDevData->certificate);
+        if(cgiFormString("addnode",pDevData->addnode,sizeof(pDevData->addnode))!=cgiFormSuccess)
+        {
+        }
+
 	if(cgiFormString("uctpubkey1",pDevData->uctpubkey1,sizeof(pDevData->uctpubkey1))!=cgiFormSuccess)
 	{
 	}
+
 	if(cgiFormString("broadcastsign",pDevData->broadcastsign,sizeof(pDevData->broadcastsign))!=cgiFormSuccess)
 	{
 	}
@@ -172,6 +177,9 @@ void writedev(DEV_CFG * pDevData)
 	   write_profile_string_nosection("externalip",pDevData->externalip,DEV_FILE);
 
         DEBUGINFO2(" writedev externalip %s \n", pDevData->externalip);
+
+       if(pDevData->addnode[0]!=0)
+          write_profile_string_nosection("addnode",pDevData->externalip,DEV_FILE);
 
         pDevData->masternode =1;
         sprintf(temp,"%d",pDevData->masternode);	
