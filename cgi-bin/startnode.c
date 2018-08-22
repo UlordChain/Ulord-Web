@@ -47,17 +47,19 @@ int cgiMain()
 
     cgiHeaderContentType("application/json");
     DEBUGINFO("startnode cmd start\n");
-    int ret = startnode();
+    //int ret = startnode();
     DEBUGINFO("startnode cmd end\n");
-    if(ret>0)
+    if(1)
     { 
          fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":1}");
     }
 	else
 	{
-          fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":0}");
-	
+         fprintf(cgiOut,"{\"masternode\":\"start\",\"status\":0}");
 	}
+    
+    int ret = startnode();
+    DEBUGINFO2("startnode cmd end ret = %d\n",ret);
  
 	return 0;
 }
@@ -68,7 +70,6 @@ int startnode()
 	int pid;
  
     sprintf(cmd,"/home/ulord/bin/ulordd & ");
-    system(cmd);
-    return 1;
+    return  system(cmd);
 }
 
