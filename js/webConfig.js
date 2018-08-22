@@ -16,7 +16,7 @@ $(function(){
 		}else if(b == '' || b == null){
 			myModal(2,'请再次输入新密码！',2000)
 		}else if(!reg.test(a) || !reg.test(b) || !reg.test(old)){
-			myModal(2,'密码格式不正确,请重新输入8-20位混合密码！',2000);
+			myModal(2,'新密码格式不正确,请重新输入8-20位混合密码！',2000);
 		}else if(a != b){
 			myModal(2,'密码不一致，请重新输入!',2000);
 		}else{
