@@ -337,6 +337,7 @@ a,a:visited,a:hover,a:active,a:focus {
 .form-box .form-control {
 	background: #fff;
 	padding: 0 20px;
+	border:1px solid rgb(217, 217, 217);
 }
 .form-box .form-control:focus {
 	background: #fff;

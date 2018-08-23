@@ -55,7 +55,7 @@ $(function(){
 		var required = /.{1,}/;
 		var ip = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
 		var getLength = GetLength = function(str){
-   		 	return str.replace(/[^\x00-\xff]/g,"aa").length;
+			return str.replace(/[^\x00-\xff]/g,"aa").length;
 		}
 		var isNumber=/^\d{1,}$/;
 		var rpcName = $('#rpcName').val();
@@ -86,7 +86,7 @@ $(function(){
 			alertField = '交易索引';
 		}else if(!(addIp.match(ip) || addIp =='')){
 			alertField = '额外增加的同步节点';
-		}else if(!timestamp.match(/^\d{0,10}$/)){
+		}else if(!timestamp.match(/^\d{10}$/) || timestamp < 1537545600){
 			alertField = '证书到期日期';
 		}else {
 			return true
@@ -181,14 +181,12 @@ $(function(){
 						}
 					})
 					$('#confirm').modal('hide')
-								$('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
-								$('#myModal').modal('show')
-								mainNodeStatus.status = 1
-								
-								$('#rpcName,#rpcPwd').attr('readonly',true)
-								setTimeout(function(){
-									$('#myModal').modal('hide')
-								},5000)
+					myModal(0,'正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！',5000)
+					setLocalStatus('status',1)
+					$('#rpcName,#rpcPwd').attr('readonly',true)
+					setTimeout(function(){
+						$('#myModal').modal('hide')
+					},5000)
 				}else if(code == 2){
 					$.ajax({
 						type:'GET',
@@ -196,14 +194,10 @@ $(function(){
 						success:function(data){
 							if(data.ulord =='stop'){
 								$('#confirm').modal('hide')
-								$('#myModal .modal-content .fa').removeClass('fa-check-circle text-success').addClass('fa-exclamation-circle text-danger')
-								$('#myModal .content').html('正在关闭主节点，这需要几分钟，请根据主节点信号灯判断是否关闭！');
-								$('#myModal').modal('show')
-								mainNodeStatus.status = 3
+								myModal(0,'正在关闭主节点，这需要几分钟，请根据主节点信号灯判断是否关闭！',5000)
+								setLocalStatus('status',3)
 								$('#rpcName,#rpcPwd').attr('readonly',true)
-								setTimeout(function(){
-									$('#myModal').modal('hide')
-								},5000)
+								
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
@@ -222,60 +216,105 @@ $(function(){
 			// 主节点全局状态
 			mainNodeStatus = {
 				status:0,  /* 0:未启动 1：启动中 2：运行 3：关闭中 */
-				operation:0, /* 0:无动作 1：启动中 2：关闭中*/
-				prevStatus:{}
+				operation:0 /* 0:无动作 1：启动中 2：关闭中*/
+			}
+			timestamp = Date.now()
+			//操作按钮UI界面
+			function setUlordStatus(status){
+				switch(status){
+					case 0:
+					$('.checked-switch').prop('checked',false);
+					$('.text-switch').attr('data-yes','启动').attr('data-no','未启动')
+					$('#rpcName,#rpcPwd').attr('readonly',false)
+					break;
+					case 1:
+					$('.checked-switch').prop('checked',false);
+					$('.text-switch').attr('data-yes','启动中').attr('data-no','启动中')
+					$('#rpcName,#rpcPwd').attr('readonly',true)
+					break;
+					case 2:
+					$('.checked-switch').prop('checked',true);
+					$('.text-switch').attr('data-yes','启动').attr('data-no','启动')
+					$('#rpcName,#rpcPwd').attr('readonly',true)
+					break;
+					case 3:
+					$('.checked-switch').prop('checked',false);
+					$('.text-switch').attr('data-yes','关闭中').attr('data-no','关闭中')
+					$('#rpcName,#rpcPwd').attr('readonly',true)
+					break;
+					default:
+					break;
+				}
+			}
+			function restoreStatus(data){
+				if(window.localStorage.getItem('mainNodeStatus')){
+					mainNodeStatus = JSON.parse(window.localStorage.getItem('mainNodeStatus'))
+				}else {
+					if(data.ulord == 'start'){
+						mainNodeStatus.status = 2
+					}else {
+						mainNodeStatus.status = 0
+					}
+					mainNodeStatus.operation = 0
+					window.localStorage.setItem('mainNodeStatus',JSON.stringify(mainNodeStatus))
+				}
+			}
+			// 操作localStorage中的状态
+			function setLocalStatus(name,value){
+				mainNodeStatus[name] = value
+				var raw =  JSON.parse(window.localStorage.getItem('mainNodeStatus'))
+				raw[name] = value
+				window.localStorage.setItem('mainNodeStatus',JSON.stringify(raw))
 			}
 
 			// 循环获取状态
 			function getStatus(){
-				if(mainNodeStatus.prevStatus.timestamp && Date.now()-mainNodeStatus.prevStatus.timestamp>5000){
-							myModal(2,'与主节点通信不稳定，请稍后再试',2000)
+				if((Date.now() - timestamp)>120000){
+					myModal(2,'与主节点通信不稳定，请稍后再试！',2000)
 				}
 				$.get('../cgi-bin/status.cgi',{
 					para: window.localStorage.getItem('sessionid')
 				},function(data){
 					if(data.session!=="failed"){
-						// 检测与上一次状态是否发生变化
-						var statusChanged = false;
-						if(mainNodeStatus.prevStatus.ulord !== data.ulord){
-							statusChanged = true
-							
-						}
-						if(mainNodeStatus.prevStatus == {}){
-							statusChanged = false
-							console.log(mainNodeStatus.prevStatus.ulord,data.ulord)
-						}
-						mainNodeStatus.prevStatus.ulord = data.ulord
-						mainNodeStatus.prevStatus.masternode = data.masternode
-						mainNodeStatus.prevStatus.timestamp = Date.now()
+						restoreStatus(data)					
+						// 获取主节点程序状态
 						$('.title2 span').removeClass('gray green').addClass(data.masternode=='start'?'green':'gray').text(data.masternode=='start'?'运行':'未启动')
-						if(data.ulord=='start' && statusChanged){
-							$('.checked-switch').prop('checked',true)
-							mainNodeStatus.status = 2
-							$('#rpcName,#rpcPwd').attr('readonly',true)
-							if(mainNodeStatus.operation==1){
-								myModal(1,'主节点启动成功',5000)
-								mainNodeStatus.operation =0
+						
+						
+						switch(mainNodeStatus.status){
+							case 0:
+							case 2:
+							break;
+							case 1:
+							if(data.ulord == 'start'){
+								myModal(1,'主节点启动成功！',5000)
+								setLocalStatus('status',2)
 							}
-						}else if(data.ulord=='stop' && statusChanged){
-							$('.checked-switch').prop('checked',false)
-							mainNodeStatus.status = 0
-							$('#rpcName,#rpcPwd').attr('readonly',false)
-							if(mainNodeStatus.operation==2){
-								myModal(1,'主节点关闭成功',5000)
-								mainNodeStatus.operation = 0
-							}
-						}
-						if(mainNodeStatus.status == 0 || mainNodeStatus.status == 2){
-							$('.text-switch').attr('data-yes','启动').attr('data-no','未启动')			
-						}else if(mainNodeStatus.status == 1){
-							$('.text-switch').attr('data-no','启动中').attr('data-yes','启动中')
-						}else if(mainNodeStatus.status == 3){
-							$('.text-switch').attr('data-yes','关闭中').attr('data-no','关闭中')
+							break;
 
+							case 3:
+							if(data.ulord == 'stop'){
+								myModal(1,'主节点关闭成功！',5000)
+								setLocalStatus('status',0)
+							}else {
+								$.ajax({
+									type:'GET',
+									url:'../cgi-bin/stopnode.cgi?para='+window.localStorage.getItem('sessionid'),
+									success:function(data){
+
+									},
+									error:function(err,text){
+										myModal(2,'网络异常，请稍后再试！',2000);
+									}
+
+								})
+							}
+							break;
 						}
-						
-						
+						setUlordStatus(mainNodeStatus.status)
+						timestamp = Date.now()
+
+
 					}else {
 						window.localStorage.removeItem('sessionid')
 						window.location.href="/"
@@ -293,12 +332,12 @@ $(function(){
 					case 3:
 					break;
 					case 2:
-					mainNodeStatus.operation = 2
+					setLocalStatus('operation',2)
 					$('#confirm .modal-body .red').text('你正在关闭主节点')
 					$('#confirm').modal('show')
 					break;
 					case 0:
-					mainNodeStatus.operation = 1
+					setLocalStatus('operation',1)
 					$('#confirm .modal-body .red').text('你正在打开主节点')
 					$('#confirm').modal('show')
 					break;
@@ -311,7 +350,7 @@ $(function(){
 				mainNodeOperate(mainNodeStatus.operation)
 			})
 			$('#cancelOp').on('click',function(e){
-				mainNodeStatus.operation = 0
+				setLocalStatus('operation',0)
 			})
 
 			// 初始化获取主节点配置
@@ -351,11 +390,11 @@ $(function(){
 				
 			})
 			$(document).on('keypress',function(e){
-            var keyCode = e.keyCode || e.which
-            if(keyCode==13){
-                $('#submitConfig').trigger('click')
-            }
-       		})
+				var keyCode = e.keyCode || e.which
+				if(keyCode==13){
+					$('#submitConfig').trigger('click')
+				}
+			})
 			// 导航栏
 			$('#switcher').on('click',function(){
 				$('.switch-container').toggleClass('in')
