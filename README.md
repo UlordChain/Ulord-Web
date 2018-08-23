@@ -10,6 +10,9 @@ This web site is composed of a completely static structure,No modularization, no
 
 
 ***
+这是一个示范
+[demo](https://github.com/UlordChain/Ulord-Web/blob/master/web%20conf.md)
+
 搭建Web服务器
 [Ubuntu配置boa](https://github.com/UlordChain/Ulord-Web/blob/master/boa.md)
 
