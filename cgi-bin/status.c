@@ -53,7 +53,7 @@ int cgiMain()
 	  fprintf(cgiOut,"{");
         // cgiHeaderContentType("text/html;charset=gbk\n");
       fprintf(cgiOut,"\"ulord\":\"start\",\"status\":1,");
-	  ret  = querynode();
+	  ret  = querymaster();
 	  if(ret>0)
 	  {
 	 	fprintf(cgiOut,"\"masternode\":\"start\",\"status\":1");
@@ -111,17 +111,60 @@ int querypid()
 	}
 }
 
+int querymaster()
+{  
+   char cmd[128] = { 0 };
+
+   sprintf(cmd,"rm aout.txt");
+   system(cmd);
+
+   
+   sprintf(cmd,"ulord-cli masternode status  1>aout.txt");
+   system(cmd);
+
+    char buff[1024] = { 0 };
+    char out[2024] = { 0 };
+    FILE *fstream = NULL;
+    memset(buff, 0, sizeof(buff));
+   
+    if (NULL == (fstream = fopen("aout.txt", "r")))
+    {
+       //fprintf(stderr, "execute command failed: %s", strerror(errno));
+        return 0;
+    }
+    while (!feof(fstream))
+    {
+        //
+        if (fgets(buff, 512, fstream))
+        {
+            strcat(out, buff);
+        }
+    }
+
+
+    DEBUGINFO2("status masternodeis run pid  %s\n",out);
+    pclose(fstream);
+
+    char * pFind = strstr(out , "started");
+
+    if(pFind !=0)
+       return 1;
+
+    return 0;
+ 
+}
+
+
 
 int querynode()
 {
     char cmd[128] = { 0 };
     char buff[1024] = { 0 };
     char out[2024] = { 0 };
-    int pid;
     FILE *fstream = NULL;
     memset(buff, 0, sizeof(buff));
 
-    sprintf(cmd, "ulord-cli masterndoe status|grep enable");
+    sprintf(cmd, "ulord-cli masterndoe status");
 	if (NULL == (fstream = popen(cmd, "r")))
 	{
             //fprintf(stderr, "execute command failed: %s", strerror(errno));
@@ -129,7 +172,7 @@ int querynode()
 	}
     while (!feof(fstream))
     {
-        // 从文件中读取一行
+        //
         if (fgets(buff, 512, fstream))
         {
             // 连接字符串
@@ -137,8 +180,9 @@ int querynode()
         }
     }
 
-
-	pclose(fstream);
+    
+    DEBUGINFO2("status masternodeis run pid  %s\n",out);
+    pclose(fstream);
 
     char * pFind = strstr(out , "started");
 
