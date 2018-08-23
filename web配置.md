@@ -61,17 +61,10 @@ Ulord桌面版钱包可到官网下载：http://ulord.one/download.html
 
 ### · 额外增加的同步节点
 
-
 ### · 证书
-
 
 ### · 证书到期日期
 
-
 ### · 证书版本
 
-
 ### · 验证证书的公钥
-
-
-![](https://cdn.nlark.com/yuque/0/2018/png/148434/1534990908150-2fd896b4-5314-4cdc-86c0-bc28276ed0ff.png)
