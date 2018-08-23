@@ -10,6 +10,9 @@ This web site is composed of a completely static structure,No modularization, no
 
 
 ***
+_如何在浏览器进行配置？可以在此文档查看_
+[用户手册](https://github.com/UlordChain/Ulord-Web/blob/master/web%E9%85%8D%E7%BD%AE.md)
+
 搭建Web服务器
 [Ubuntu配置boa](https://github.com/UlordChain/Ulord-Web/blob/master/boa.md)
 
