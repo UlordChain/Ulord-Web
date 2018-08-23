@@ -16,22 +16,26 @@ method: GET
 ### 返回状态接口
 请求方法：  
 url: /cgi-bin/status.cgi  
-method: GET
+method: GET  
+增加参数 para= sessionid
 
 ### 启动接口
 请求方法：  
 url: /cgi-bin/startnode.cgi  
-method: GET
+method: GET  
+增加参数 para= sessionid
 
 ### 停止接口
 请求方法：  
 url: /cgi-bin/stopnode.cgi  
-method: get
+method: get  
+增加参数 para= sessionid
 
 ### 读配置接口
 请求方法：  
 url: /cgi-bin/readcfg.cgi  
-method: GET
+method: GET  
+增加参数 para= sessionid
 
     {    
     "status":1,
@@ -55,7 +59,8 @@ method: GET
 ### 保存配置接口
 请求方法：  
 url: /cgi-bin/.writecfg.cgi  
-method: GET
+method: GET  
+增加参数 para= sessionid
 
 传参  
 
@@ -77,4 +82,5 @@ method: GET
 ### 退出登录
 请求方法： 
 url: /cgi-bin/logout.cgi  
-method: GET
+method: GET  
+增加参数 para= sessionid
