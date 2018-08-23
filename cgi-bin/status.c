@@ -146,8 +146,8 @@ int querymaster()
     fclose(fstream);
 
     char * pFind = strstr(out , "started");
-
-    if(pFind !=0)
+    char * pFind2= strstr(out,"successfully");
+    if(pFind !=0 && pFind2!=0)
        return 1;
 
     return 0;
