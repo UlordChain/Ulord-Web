@@ -143,7 +143,7 @@ int querymaster()
 
 
     DEBUGINFO2("status masternodeis run pid  %s\n",out);
-    pclose(fstream);
+    fclose(fstream);
 
     char * pFind = strstr(out , "started");
 
@@ -175,13 +175,12 @@ int querynode()
         //
         if (fgets(buff, 512, fstream))
         {
-            // 连接字符串
             strcat(out, buff);
         }
     }
 
     
-    DEBUGINFO2("status masternodeis run pid  %s\n",out);
+   // DEBUGINFO2("status masternodeis run pid  %s\n",out);
     pclose(fstream);
 
     char * pFind = strstr(out , "started");
