@@ -70,7 +70,7 @@ $(function(){
 		var certificate = $('#certificate').val();
 		var version = $('#version').val();
 		var publicKey = $('#publicKey').val();
-		if(!(rpcName.match(required) && getLength(rpcName) <= 200)){
+		if(!(rpcName.match(required) && getLength(rpcName) <= 20)){
 			alertField = 'RPC账号';
 		}else if(!(rpcPwd.match(required) && getLength(rpcPwd) <= 200)){
 			alertField = 'RPC密码';
@@ -94,6 +94,73 @@ $(function(){
 		myModal(2,alertField+'格式错误，请重新输入！',2000)
 		return false
 	}
+	// 输入框失焦验证
+	$('input[type=text],textarea').on('blur',function(e){
+		var required = /.{1,}/;
+		var ip = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
+		var getLength = GetLength = function(str){
+			return str.replace(/[^\x00-\xff]/g,"aa").length;
+		}
+		switch (e.target.id) {
+			case 'rpcName':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'rpcPwd':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'ipAddress':
+				if(!(e.target.value.match(required) && e.target.value.match(ip))){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'nodeSign':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'featureCode':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'txHash':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'txIndex':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$(e.target).css('borderColor','red')
+				}else {
+					$(e.target).css('borderColor','rgb(217, 217, 217')
+				}
+			break;
+			case 'certificate':
+				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$('#timestamp,#version').val('').attr('disabled',true)
+				}else {
+					$('#timestamp,#version').val('').attr('disabled',false)
+				}
+			default:
+			break;
+		}
+	})
 
 	// 提示框myModal
 	// @param label 0:warning 1:success 2： danger
@@ -278,7 +345,7 @@ $(function(){
 					if(data.session!=="failed"){
 						restoreStatus(data)					
 						// 获取主节点程序状态
-						$('.title2 span').removeClass('gray green').addClass(data.masternode=='start'?'green':'gray').text(data.masternode=='start'?'运行':'未启动')
+						$('.title2 span').removeClass('gray green').addClass(data.masternode=='start'?'green':'gray').text(data.masternode=='start'?'运行':'未运行')
 						
 						
 						switch(mainNodeStatus.status){
@@ -373,6 +440,9 @@ $(function(){
 						$('#publicKey').val(data.uctpubkey1) /*验证证书的公钥*/
 						$('#timestamp').val(data.certifiperiod) /*证书到期日期*/
 						$('#formatedDate').text(new Date($('#timestamp').val()*1000).toLocaleString())
+						if($('#certificate').val()){
+							$('#timestamp,#version').attr('disabled',false)
+						}
 					}else {
 						window.localStorage.removeItem('sessionid')
 						window.location.href="/"

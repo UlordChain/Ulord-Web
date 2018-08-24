@@ -441,7 +441,7 @@ a,a:visited,a:hover,a:active,a:focus {
 	font-size: 20px;
 	color:rgba(255, 255, 255, 0.8);
 	box-sizing: border-box;
-	text-align:center;
+	text-align: center;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
