@@ -179,7 +179,7 @@ void writedev(DEV_CFG * pDevData)
         DEBUGINFO2(" writedev externalip %s \n", pDevData->externalip);
 
        if(pDevData->addnode[0]!=0)
-          write_profile_string_nosection("addnode",pDevData->externalip,DEV_FILE);
+          write_profile_string_nosection("addnode",pDevData->addnode,DEV_FILE);
 
         pDevData->masternode =1;
         sprintf(temp,"%d",pDevData->masternode);	
