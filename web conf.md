@@ -4,7 +4,7 @@
 用户在Linux配置好web服务器之后，在浏览器的地址输入栏目，输入Linux的本地IP地址  
 第一次登陆，默认用户名：admin,默认密码：admin 。
  
-![图1](https://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535074941788-04a9a14c-c82b-4f62-8788-51bfa854aa1b.png)
+![w](http://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535074941788-04a9a14c-c82b-4f62-8788-51bfa854aa1b.png)
 
 ****
 ## 2. 主节点配置界面
