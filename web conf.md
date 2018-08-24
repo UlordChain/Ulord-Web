@@ -2,7 +2,7 @@
 *** 
 ## 1. 登陆界面
 用户在Linux配置好web服务器之后，在浏览器的地址输入栏目，输入Linux的本地IP地址  
-第一次登陆，默认用户名：admin,默认密码：admin 。
+第一次登陆，默认用户名：admin,默认密码：admin123 。
  
 ![w](https://github.com/UlordChain/Ulord-Web/blob/master/imgs/1.png)
 
