@@ -155,7 +155,7 @@ $(function(){
 				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
 					$('#timestamp,#version').val('').attr('disabled',true)
 				}else {
-					$('#timestamp,#version').val('').attr('disabled',false)
+					$('#timestamp,#version').attr('disabled',false)
 				}
 			default:
 			break;
