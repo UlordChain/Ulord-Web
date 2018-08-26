@@ -4,21 +4,21 @@
 用户在Linux配置好web服务器之后，在浏览器的地址输入栏目，输入Linux的本地IP地址  
 第一次登陆，默认用户名：admin,默认密码：admin123 。
  
-![图1](https://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535074941788-04a9a14c-c82b-4f62-8788-51bfa854aa1b.png)
+![图1](https://cdn.nlark.com/yuque/0/2018/png/148434/1535246419277-0a10bbfc-fd14-4069-b459-b22610b154b5.png)
 
 ****
 ## 2. 主节点配置界面
 第一次登陆时，会弹出修改密码界面，需要修改默认密码才能配置主节点。
 
-![图2](https://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535075218089-8450faf3-b7e7-4766-962b-6bbfd7f95b4d.png)
+![图2](https://cdn.nlark.com/yuque/0/2018/png/148434/1534992217983-2fc58e38-9365-4811-8840-2429084f0a23.png)
 
 修改密码之后
 
-![图3](https://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535075529336-d035c0fd-fb5c-45b5-be30-a65931fa28b2.png)
+![图3](https://cdn.nlark.com/yuque/0/2018/png/148434/1534992990530-d29507f7-33f9-426b-8607-5ca405af96ed.png)
 
 以后还想再次修改密码时，可点击左边框的修改密码按钮
 
-![图4](https://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535075218089-8450faf3-b7e7-4766-962b-6bbfd7f95b4d.png)
+![图4](https://cdn.nlark.com/yuque/0/2018/png/148434/1534993295118-e1ca239b-035b-4bfa-9457-a533181b6bf9.png)
 
 ***
 
@@ -49,7 +49,7 @@
 ### · 交易索引
 可以从Ulord桌面版钱包获取
 
-![图5](http://cdn-pri.nlark.com/yuque/358/2018/png/100783/1535245279902-ce549fae-960e-4203-8e28-f63d892505b6.png)
+![图5](https://cdn.nlark.com/yuque/0/2018/png/148434/1535246491545-5b4c7a67-24d9-4851-a97b-c8959656545d.png)
 
 [Ulord桌面版钱包下载地址](http://ulord.one/download.html)
 
