@@ -26,7 +26,7 @@
 			<div class="form-config">
 				<div class="container">
 					
-					<div class="row switch">
+					<div class="row switch" id="masternodeSwitcher">
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 							<div class="title inline">主节点开关：</div>
 							<div class="inline">
@@ -103,7 +103,16 @@
 						</div>
 
 
-						<h3>主节点（选填）</h3>
+						<h3 id="extraNode">
+							主节点（选填）
+							<div class="inline fr">
+								<label class="switch-btn circle-style">
+									<input class="checked-switch" type="checkbox">
+									<span class="text-switch" data-yes="开启" data-no="关闭"></span> 
+									<span class="toggle-btn"></span> 
+								</label>
+							</div>
+						</h3>
 						<div class="form-group">
 							<label for="addIp" class="col-sm-3 control-label">额外增加的同步节点：</label>
 							<div class="col-sm-9">
@@ -121,7 +130,7 @@
 						<div class="form-group">
 							<label for="timestamp" class="col-sm-3 control-label">证书到期日期：</label>
 								<div class="col-sm-6">								
-									<input type="text" class="form-control" id="timestamp" maxlength="10" placeholder="请输入时间戳" onkeyup="value=value.replace(/[^\d]/g,'')" disabled="disabled">
+									<input type="text" class="form-control" id="timestamp" maxlength="10" placeholder="请输入时间戳" onkeyup="value=value.replace(/[^\d]/g,'')" disabled>
 					
 								</div>
 								<div class="formatedDate col-sm-3" id="formatedDate">
@@ -131,7 +140,7 @@
 						<div class="form-group">
 							<label for="version" class="col-sm-3 control-label">证书版本：</label>
 							<div class="col-sm-9">
-								<input type="number" class="form-control" id="version" maxlength="200" placeholder="请输入证书版本" onkeyup="value=value.replace(/[^1-9]/g,'')" disabled="disabled" value='1'>
+								<input type="number" class="form-control" id="version" maxlength="200" placeholder="请输入证书版本" onkeyup="value=value.replace(/[^1-9]/g,'')" value='1' disabled>
 				
 							</div>
 						</div>

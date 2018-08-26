@@ -152,10 +152,10 @@ $(function(){
 				}
 			break;
 			case 'certificate':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$('#timestamp,#version').val('').attr('disabled',true)
+				if((e.target.value.match(required) && getLength(e.target.value) <= 200)){
+					$('#timestamp,#version').val('').attr('disabled',false)
 				}else {
-					$('#timestamp,#version').attr('disabled',false)
+					$('#timestamp,#version').attr('disabled',true)
 				}
 			default:
 			break;
@@ -163,9 +163,9 @@ $(function(){
 	})
 
 	// 提示框myModal
-	// @param label 0:warning 1:success 2： danger
-	// @param text 提示文字
-	// @param time 显示时间
+	// -- param label 0:warning 1:success 2： danger --
+	// -- param text 提示文字 --
+	// -- param time 显示时间 --
 	function myModal(label,text,time){
 		time = time || 10000
 		var collection = 'fa-check-circle text-success fa-exclamation-circle text-warning fa-times-circle text-danger'
@@ -290,23 +290,23 @@ $(function(){
 			function setUlordStatus(status){
 				switch(status){
 					case 0:
-					$('.checked-switch').prop('checked',false);
+					$('#masternodeSwitcher .checked-switch').prop('checked',false);
 					$('.text-switch').attr('data-yes','启动').attr('data-no','未启动')
 					$('#rpcName,#rpcPwd').attr('readonly',false)
 					break;
 					case 1:
-					$('.checked-switch').prop('checked',false);
-					$('.text-switch').attr('data-yes','启动中').attr('data-no','启动中')
+					$('#masternodeSwitcher .checked-switch').prop('checked',false);
+					$('#masternodeSwitcher .text-switch').attr('data-yes','启动中').attr('data-no','启动中')
 					$('#rpcName,#rpcPwd').attr('readonly',true)
 					break;
 					case 2:
-					$('.checked-switch').prop('checked',true);
-					$('.text-switch').attr('data-yes','启动').attr('data-no','启动')
+					$('#masternodeSwitcher .checked-switch').prop('checked',true);
+					$('#masternodeSwitcher .text-switch').attr('data-yes','启动').attr('data-no','启动')
 					$('#rpcName,#rpcPwd').attr('readonly',true)
 					break;
 					case 3:
-					$('.checked-switch').prop('checked',false);
-					$('.text-switch').attr('data-yes','关闭中').attr('data-no','关闭中')
+					$('#masternodeSwitcher .checked-switch').prop('checked',false);
+					$('#masternodeSwitcher .text-switch').attr('data-yes','关闭中').attr('data-no','关闭中')
 					$('#rpcName,#rpcPwd').attr('readonly',true)
 					break;
 					default:
@@ -392,7 +392,7 @@ $(function(){
 			getStatus()
 
 
-			$('.checked-switch').on('click',function(e){
+			$('#masternodeSwitcher .checked-switch').on('click',function(e){
 				e.preventDefault()
 				switch(mainNodeStatus.status){
 					case 1:
@@ -443,6 +443,7 @@ $(function(){
 						if($('#certificate').val()){
 							$('#timestamp,#version').attr('disabled',false)
 						}
+						$('#addIp,#certificate,#timestamp,#version,#publicKey').prop('readonly',!$('#extraNode .checked-switch').prop('checked'))
 					}else {
 						window.localStorage.removeItem('sessionid')
 						window.location.href="/"
@@ -486,5 +487,18 @@ $(function(){
 				$('#formatedDate').text(new Date(e.target.value*1000).toLocaleString())
 			})
 
+
+		/**  
+    		-- 额外节点开关 --
+		*/
+		  
+		$('#extraNode .checked-switch').on('change',function(e){
+			if($('#certificate').val()){
+				$('#version,#timestamp,#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
+			}else {
+				$('#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
+				$('#version,#timestamp').attr('disabled',true)
+			}
+		})
 
 		})

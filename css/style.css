@@ -233,6 +233,19 @@ a,a:visited,a:hover,a:active,a:focus {
 	border-radius: 18px; 
 	cursor: pointer;
 }
+/*fix 额外节点*/ 
+#extraNode .circle-style .toggle-btn::before {
+	margin-left: 7px;
+	margin-top: -3px;
+}
+#extraNode .text-switch:before,#extraNode .text-switch:after {
+	color:white;
+}
+#extraNode .inline {
+	margin-right: 56px;
+}
+/*fix 额外节点*/
+
 .checked-switch {
 	position: absolute; 
 	top: 0; 
