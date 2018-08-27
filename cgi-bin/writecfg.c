@@ -102,7 +102,7 @@ int  get_dev_cfg(DEV_CFG * pDevData )
 	{
 	   pDevData->masternode = 1;
 	}	
-	//pDevData->masternode = 1;
+	pDevData->masternode = atoi(temp);
 	
 	if(cgiFormString("masternodeprivkey",pDevData->masternodeprivkey,sizeof(pDevData->masternodeprivkey))!=cgiFormSuccess)
 	{
