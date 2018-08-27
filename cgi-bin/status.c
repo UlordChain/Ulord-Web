@@ -142,7 +142,7 @@ int querymaster()
     }
 
 
-    DEBUGINFO2("status masternodeis run pid  %s\n",out);
+    //DEBUGINFO2("status masternodeis run pid  %s\n",out);
     fclose(fstream);
 
     char * pFind = strstr(out , "started");
