@@ -153,7 +153,7 @@ $(function(){
 			break;
 			case 'certificate':
 				if((e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$('#timestamp,#version').val('').attr('disabled',false)
+					$('#timestamp,#version').attr('disabled',false)
 				}else {
 					$('#timestamp,#version').attr('disabled',true)
 				}
