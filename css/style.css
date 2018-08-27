@@ -241,9 +241,6 @@ a,a:visited,a:hover,a:active,a:focus {
 #extraNode .text-switch:before,#extraNode .text-switch:after {
 	color:white;
 }
-#extraNode .inline {
-	margin-right: 56px;
-}
 /*fix 额外节点*/
 
 .checked-switch {
@@ -524,3 +521,10 @@ a,a:visited,a:hover,a:active,a:focus {
 	color:yellow;
 }
 /*confirm模态框自定义*/
+
+#extraNode span:first-of-type{
+	color:inherit;
+}
+#extraNode span:last-of-type{
+	color:red;
+}

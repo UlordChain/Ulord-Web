@@ -230,14 +230,9 @@ $(function(){
 						url:'../cgi-bin/startnode.cgi?para='+window.localStorage.getItem('sessionid'),
 						success:function(data){
 							if(data.ulord =='start'){
-								// $('#confirm').modal('hide')
-								// $('#myModal .content').html('正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！');
-								// $('#myModal').modal('show')
-								// mainNodeStatus.status = 1
-
-								// setTimeout(function(){
-								// 	$('#myModal').modal('hide')
-								// },5000)
+								$('#confirm').modal('hide')
+								myModal(0,'正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！',5000)
+								$('#rpcName,#rpcPwd').attr('readonly',true)
 							}else {
 								window.localStorage.removeItem('sessionid')
 								window.location.href="/"
@@ -247,13 +242,7 @@ $(function(){
 							// myModal(2,'网络异常，请稍后再试！',2000);
 						}
 					})
-					$('#confirm').modal('hide')
-					myModal(0,'正在启动主节点，<span style="rgba(255,0,0,0.7)">这可能需要几小时</span>，请根据主节点信号灯判断是否启动成功！',5000)
-					setLocalStatus('status',1)
-					$('#rpcName,#rpcPwd').attr('readonly',true)
-					setTimeout(function(){
-						$('#myModal').modal('hide')
-					},5000)
+					
 				}else if(code == 2){
 					$.ajax({
 						type:'GET',
@@ -262,7 +251,6 @@ $(function(){
 							if(data.ulord =='stop'){
 								$('#confirm').modal('hide')
 								myModal(0,'正在关闭主节点，这需要几分钟，请根据主节点信号灯判断是否关闭！',5000)
-								setLocalStatus('status',3)
 								$('#rpcName,#rpcPwd').attr('readonly',true)
 								
 							}else {
@@ -280,58 +268,21 @@ $(function(){
 				
 			}
 
-			// 主节点全局状态
-			mainNodeStatus = {
-				status:0,  /* 0:未启动 1：启动中 2：运行 3：关闭中 */
-				operation:0 /* 0:无动作 1：启动中 2：关闭中*/
-			}
 			timestamp = Date.now()
 			//操作按钮UI界面
 			function setUlordStatus(status){
 				switch(status){
 					case 0:
 					$('#masternodeSwitcher .checked-switch').prop('checked',false);
-					$('.text-switch').attr('data-yes','启动').attr('data-no','未启动')
 					$('#rpcName,#rpcPwd').attr('readonly',false)
 					break;
 					case 1:
-					$('#masternodeSwitcher .checked-switch').prop('checked',false);
-					$('#masternodeSwitcher .text-switch').attr('data-yes','启动中').attr('data-no','启动中')
-					$('#rpcName,#rpcPwd').attr('readonly',true)
-					break;
-					case 2:
 					$('#masternodeSwitcher .checked-switch').prop('checked',true);
-					$('#masternodeSwitcher .text-switch').attr('data-yes','启动').attr('data-no','启动')
-					$('#rpcName,#rpcPwd').attr('readonly',true)
-					break;
-					case 3:
-					$('#masternodeSwitcher .checked-switch').prop('checked',false);
-					$('#masternodeSwitcher .text-switch').attr('data-yes','关闭中').attr('data-no','关闭中')
 					$('#rpcName,#rpcPwd').attr('readonly',true)
 					break;
 					default:
 					break;
 				}
-			}
-			function restoreStatus(data){
-				if(window.localStorage.getItem('mainNodeStatus')){
-					mainNodeStatus = JSON.parse(window.localStorage.getItem('mainNodeStatus'))
-				}else {
-					if(data.ulord == 'start'){
-						mainNodeStatus.status = 2
-					}else {
-						mainNodeStatus.status = 0
-					}
-					mainNodeStatus.operation = 0
-					window.localStorage.setItem('mainNodeStatus',JSON.stringify(mainNodeStatus))
-				}
-			}
-			// 操作localStorage中的状态
-			function setLocalStatus(name,value){
-				mainNodeStatus[name] = value
-				var raw =  JSON.parse(window.localStorage.getItem('mainNodeStatus'))
-				raw[name] = value
-				window.localStorage.setItem('mainNodeStatus',JSON.stringify(raw))
 			}
 
 			// 循环获取状态
@@ -342,43 +293,12 @@ $(function(){
 				$.get('../cgi-bin/status.cgi',{
 					para: window.localStorage.getItem('sessionid')
 				},function(data){
-					if(data.session!=="failed"){
-						restoreStatus(data)					
+					if(data.session!=="failed"){			
 						// 获取主节点程序状态
 						$('.title2 span').removeClass('gray green').addClass(data.masternode=='start'?'green':'gray').text(data.masternode=='start'?'运行':'未运行')
 						
+						setUlordStatus(data.ulord=="stop"?0:1)
 						
-						switch(mainNodeStatus.status){
-							case 0:
-							case 2:
-							break;
-							case 1:
-							if(data.ulord == 'start'){
-								myModal(1,'主节点启动成功！',5000)
-								setLocalStatus('status',2)
-							}
-							break;
-
-							case 3:
-							if(data.ulord == 'stop'){
-								myModal(1,'主节点关闭成功！',5000)
-								setLocalStatus('status',0)
-							}else {
-								$.ajax({
-									type:'GET',
-									url:'../cgi-bin/stopnode.cgi?para='+window.localStorage.getItem('sessionid'),
-									success:function(data){
-
-									},
-									error:function(err,text){
-										myModal(2,'网络异常，请稍后再试！',2000);
-									}
-
-								})
-							}
-							break;
-						}
-						setUlordStatus(mainNodeStatus.status)
 						timestamp = Date.now()
 
 
@@ -394,31 +314,19 @@ $(function(){
 
 			$('#masternodeSwitcher .checked-switch').on('click',function(e){
 				e.preventDefault()
-				switch(mainNodeStatus.status){
-					case 1:
-					case 3:
-					break;
-					case 2:
-					setLocalStatus('operation',2)
+				if(!$('#masternodeSwitcher .checked-switch').prop('checked')){
 					$('#confirm .modal-body .red').text('你正在关闭主节点')
 					$('#confirm').modal('show')
-					break;
-					case 0:
-					setLocalStatus('operation',1)
+				}else {
 					$('#confirm .modal-body .red').text('你正在打开主节点')
 					$('#confirm').modal('show')
-					break;
-					default:
-					break;
 				}
 			})
 			// 确认模态框按钮
 			$('#continue').on('click',function(e){
-				mainNodeOperate(mainNodeStatus.operation)
+				mainNodeOperate($('#masternodeSwitcher .checked-switch').prop('checked')?2:1)
 			})
-			$('#cancelOp').on('click',function(e){
-				setLocalStatus('operation',0)
-			})
+
 
 			// 初始化获取主节点配置
 			$.ajax({
@@ -443,7 +351,7 @@ $(function(){
 						if($('#certificate').val()){
 							$('#timestamp,#version').attr('disabled',false)
 						}
-						$('#addIp,#certificate,#timestamp,#version,#publicKey').prop('readonly',!$('#extraNode .checked-switch').prop('checked'))
+						$('#addIp,#certificate,#timestamp,#version,#publicKey').prop('disabled',!$('#extraNode .checked-switch').prop('checked'))
 					}else {
 						window.localStorage.removeItem('sessionid')
 						window.location.href="/"
