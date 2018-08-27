@@ -201,8 +201,8 @@ $(function(){
 				externalip:$('#ipAddress').val(),
 				broadcastsign:$('#nodeSign').val(),
 				uctpubkey1:$('#publicKey').val(),
-				certifiperiod:$('#timestamp').val()
-
+				certifiperiod:$('#timestamp').val(),
+				masternode:$('#masterNodeSetting .checked-switch').prop('checked')?"1":"0"
 			},
 			success: function(data){
 				if(data.msg=='success'){
@@ -347,6 +347,7 @@ $(function(){
 						$('#nodeSign').val(data.broadcastsign) /* 广播的主节点签名 */
 						$('#publicKey').val(data.uctpubkey1) /*验证证书的公钥*/
 						$('#timestamp').val(data.certifiperiod) /*证书到期日期*/
+						$('#masterNodeSetting .checked-switch').prop('checked',data.masternode=='1')  /*主节点开关*/
 						$('#formatedDate').text(new Date($('#timestamp').val()*1000).toLocaleString())
 						if($('#certificate').val()){
 							$('#timestamp,#version').attr('disabled',false)

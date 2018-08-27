@@ -234,11 +234,18 @@ a,a:visited,a:hover,a:active,a:focus {
 	cursor: pointer;
 }
 /*fix 额外节点*/ 
-#extraNode .circle-style .toggle-btn::before {
+#extraNode .circle-style .toggle-btn::before,#masterNodeSetting .circle-style .toggle-btn::before {
 	margin-left: 7px;
 	margin-top: -3px;
 }
-#extraNode .text-switch:before,#extraNode .text-switch:after {
+#masterNodeSetting .switch-btn {
+	width: 105px;
+
+}
+#masterNodeSetting :checked.checked-switch ~ .toggle-btn {
+	left: 76px;
+}
+#extraNode .text-switch:before,#extraNode .text-switch:after,#masterNodeSetting .text-switch:before,#masterNodeSetting .text-switch:after {
 	color:white;
 }
 /*fix 额外节点*/
