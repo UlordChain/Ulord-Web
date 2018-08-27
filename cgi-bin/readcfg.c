@@ -64,8 +64,16 @@ int cgiMain()
     fprintf(cgiOut,"\"externalip\":\"%s\",",devData.externalip  );
     fprintf(cgiOut,"\"masternode\":\"%d\",",devData.masternode  );
     fprintf(cgiOut,"\"masternodeprivkey\":\"%s\",",devData.masternodeprivkey  );
-    fprintf(cgiOut,"\"certifiversion\":\"%d\",",devData.certifiversion  );
-    fprintf(cgiOut,"\"certifiperiod\":\"%d\",",devData.certifiperiod  );
+    if(devData.certifiversion>0)  
+       fprintf(cgiOut,"\"certifiversion\":\"%d\",",devData.certifiversion  );
+    else
+       fprintf(cgiOut,"\"certifiversion\":\" \","  );
+
+    if(devData.certifiperiod>0)
+       fprintf(cgiOut,"\"certifiperiod\":\"%d\",",devData.certifiperiod  );
+    else
+       fprintf(cgiOut,"\"certifiperiod\":\"  \"," );
+
     fprintf(cgiOut,"\"certificate\":\"%s\",",devData.certificate  );
     fprintf(cgiOut,"\"uctpubkey1\":\"%s\",",devData.uctpubkey1  );
     fprintf(cgiOut,"\"broadcastsign\":\"%s\",",devData.broadcastsign  );
