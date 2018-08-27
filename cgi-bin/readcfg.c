@@ -67,12 +67,12 @@ int cgiMain()
     if(devData.certifiversion>0)  
        fprintf(cgiOut,"\"certifiversion\":\"%d\",",devData.certifiversion  );
     else
-       fprintf(cgiOut,"\"certifiversion\":\" \","  );
+       fprintf(cgiOut,"\"certifiversion\":\"1\","  );
 
     if(devData.certifiperiod>0)
        fprintf(cgiOut,"\"certifiperiod\":\"%d\",",devData.certifiperiod  );
     else
-       fprintf(cgiOut,"\"certifiperiod\":\"  \"," );
+       fprintf(cgiOut,"\"certifiperiod\":\"1538194240\"," );
 
     fprintf(cgiOut,"\"certificate\":\"%s\",",devData.certificate  );
     fprintf(cgiOut,"\"uctpubkey1\":\"%s\",",devData.uctpubkey1  );
