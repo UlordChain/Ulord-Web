@@ -98,10 +98,11 @@ int  get_dev_cfg(DEV_CFG * pDevData )
            DEBUGINFO2("get externalip faile  fin %s \n", pDevData->rpcpassword);
 	}	
 	memset(temp,0,sizeof(temp));
-        /*if(cgiFormString("masternode",temp,sizeof(temp))!=cgiFormSuccess)
+        if(cgiFormString("masternode",temp,sizeof(temp))!=cgiFormSuccess)
 	{
-	}	*/
-	pDevData->masternode = 1;
+	   pDevData->masternode = 1;
+	}	
+	//pDevData->masternode = 1;
 	
 	if(cgiFormString("masternodeprivkey",pDevData->masternodeprivkey,sizeof(pDevData->masternodeprivkey))!=cgiFormSuccess)
 	{
@@ -181,7 +182,6 @@ void writedev(DEV_CFG * pDevData)
        if(pDevData->addnode[0]!=0)
           write_profile_string_nosection("addnode",pDevData->addnode,DEV_FILE);
 
-        pDevData->masternode =1;
         sprintf(temp,"%d",pDevData->masternode);	
         DEBUGINFO2(" writedev masternode %s \n", temp);
 	write_profile_string_nosection("masternode",temp,DEV_FILE);
