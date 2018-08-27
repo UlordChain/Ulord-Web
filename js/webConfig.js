@@ -86,7 +86,7 @@ $(function(){
 			alertField = '交易索引';
 		}else if(!(addIp.match(ip) || addIp =='')){
 			alertField = '额外增加的同步节点';
-		}else if(timestamp.match(/^\d{10}$/) && timestamp < 1537545600 && timestamp.match(required)){
+		}else if( timestamp.match(required) && (!timestamp.match(/^\d{10}$/) || timestamp < 1537545600)){
 			alertField = '证书到期日期';
 		}else {
 			return true
