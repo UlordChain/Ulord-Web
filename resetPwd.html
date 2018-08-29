@@ -44,11 +44,11 @@
 									<i class="fa fa-lock"></i>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码">
+									<input type="password" class="form-control" maxlength="20" id="password" placeholder="请输入新密码（20位以下的数字字母混合密码）">
 									<i class="fa fa-lock"></i>
 								</div>
 								<div class="form-group">
-									<input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码">
+									<input type="password" class="form-control" maxlength="20" id="password2" placeholder="请再次输入新密码（20位以下的数字字母混合密码）">
 									<i class="fa fa-lock"></i>
 								</div>
 								<div class="form-group help">
@@ -126,7 +126,7 @@
 						window.localStorage.setItem('PwdModified','1')
 						window.location.href = "webConfig.html";
 					} else {
-						myModal(2,'异常错误',2000);
+						window.location.href = '/'
 					}
 
 				},
