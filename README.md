@@ -8,6 +8,11 @@ About web
 
 This web site is composed of a completely static structure,No modularization, no build tool.
 
+<details>
+  <summary>Ulord主节点专题：</summary>
+  
+  [主节点绑定教程](https://mp.weixin.qq.com/s/e1prnAV11V1hgGL2-IIb2Q)
+</details>
 
 ***
 这是一个示范
