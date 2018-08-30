@@ -14,11 +14,12 @@ This web site is composed of a completely static structure,No modularization, no
 </details>
 
 ***
-这是一个示范
+
+# 这是一个示范
 -------------
 [demo](https://github.com/UlordChain/Ulord-Web/blob/master/web%20conf.md)
 
-# 主节点配置引导
+## 主节点配置引导
 *** 
 ## 1. 登陆界面
 用户在Linux配置好web服务器之后，在浏览器的地址输入栏目，输入Linux的本地IP地址  
@@ -49,10 +50,10 @@ This web site is composed of a completely static structure,No modularization, no
 
 ## 关于主节点配置项
 ### · RPC用户名
-配置web服务器时linux的用户名
+公链守护进程的用户名
 
 ### · RPC密码
-配置web服务器时linux的密码
+公链守护进程的密码
 
 ### · 公网IP
 主节点服务器的公网IP
@@ -74,30 +75,35 @@ This web site is composed of a completely static structure,No modularization, no
 [Ulord桌面版钱包下载地址](http://ulord.one/download.html)
 
 ***
-**以下为选填，可在Ulord社区绑定主节点成功后会得到的证书查看**
+**以下为选填，可在Ulord社区绑定主节点成功后查看**
 
 ### · 额外增加的同步节点
+示范
 
 ### · 证书
+验证主节点是否有效
 
 ### · 证书到期日期
+注意在有效期内使用
 
 ### · 证书版本
+建议尽量最新版本
 
 ### · 验证证书的公钥
+可以在官网得到
 
 
 
 
+***
 
 
 
-
-搭建Web服务器
+# 搭建Web服务器
 -------------
 [Ubuntu配置boa](https://github.com/UlordChain/Ulord-Web/blob/master/boa.md)
 
-# Ubuntu配置boa
+## Ubuntu配置boa
 boa是一个web服务器，注意本文是在root权限操作的，如果不是root记得把相应文件更改权限，例如可以用”chmod -R 777 文件”下面说明安装步骤：
 
 ### 1 官方下载boa源码：http://www.boa.org/
@@ -226,11 +232,11 @@ boa目录boa-0.94.13/src/下面会多出两个可执行的二进制文件boa和b
 ### 18.根据自己搭建的虚拟机IP地址，在浏览器输入IP地址，就可以显示出index.html的页面
 
 
+***
 
 
 
-
-接口说明
+# 接口说明
 -------------
 [interface description](https://github.com/UlordChain/Ulord-Web/blob/master/Interface%20Description.md)
 
