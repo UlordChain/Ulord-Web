@@ -103,11 +103,12 @@ This web site is composed of a completely static structure,No modularization, no
 ***
 
 # 配置说明，分为docker和手动web配置，选择其一
+-------------
 
 ## 1. docker
 
 ## 2. 搭建Web服务器 此次配置的环境：Ubuntu 16.04.3
--------------
+
 [Ubuntu配置boa](https://github.com/UlordChain/Ulord-Web/blob/master/boa.md)
 
 ## Ubuntu配置boa
