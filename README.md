@@ -19,7 +19,7 @@ This web site is composed of a completely static structure,No modularization, no
 -------------
 [demo](https://github.com/UlordChain/Ulord-Web/blob/master/web%20conf.md)
 
-## 主节点配置引导
+## 主节点配置引导 此次配置的环境：Ubuntu 16.04.3
 *** 
 ## 1. 登陆界面
 用户在Linux配置好web服务器之后，在浏览器的地址输入栏目，输入Linux的本地IP地址  
@@ -37,16 +37,21 @@ This web site is composed of a completely static structure,No modularization, no
 
 ![图3](https://cdn.nlark.com/yuque/0/2018/png/148434/1534992990530-d29507f7-33f9-426b-8607-5ca405af96ed.png)
 
+.  
+.  
 以后还想再次修改密码时，可点击左边框的修改密码按钮
 
-![图4](https://cdn.nlark.com/yuque/0/2018/png/148434/1534993295118-e1ca239b-035b-4bfa-9457-a533181b6bf9.png)
+![图4](https://cdn.nlark.com/yuque/0/2018/png/148434/1534993295118-e1ca239b-035b-4bfa-9457-a533181b6bf9.png)  
 
-***
 
-<p style="color:red;">要配置主节点RPC账号密码，需要使用主节点开关处于关闭状态，否则不能输入 </p>
+
+
+**要配置主节点RPC账号密码，需要使用主节点开关处于关闭状态，否则不能输入**  
+主节点开关(1)和主节点程序状态(2)说明：  
+(1)处于关闭状态，表示普通节点，可以进行配置;(2)是显示(1)的状态。  
+(1)处于启动状态，表示升级主节点，不可以进行配置;当启动(1)的时候，需要一定的时间才能启动成功，当(2)的状态从未启动切换为启动的时候，才表示成功。  
+
 *** 
-
-
 
 ## 关于主节点配置项
 ### · RPC用户名
@@ -97,9 +102,11 @@ This web site is composed of a completely static structure,No modularization, no
 
 ***
 
+# 配置说明，分为docker和手动web配置，选择其一
 
+## 1. docker
 
-# 搭建Web服务器
+## 2. 搭建Web服务器 此次配置的环境：Ubuntu 16.04.3
 -------------
 [Ubuntu配置boa](https://github.com/UlordChain/Ulord-Web/blob/master/boa.md)
 
