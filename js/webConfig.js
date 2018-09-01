@@ -103,60 +103,60 @@ $(function(){
 		}
 		switch (e.target.id) {
 			case 'rpcName':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'rpcPwd':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 20)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'ipAddress':
-				if(!(e.target.value.match(required) && e.target.value.match(ip))){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && e.target.value.match(ip))){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'nodeSign':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'featureCode':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'txHash':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'txIndex':
-				if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$(e.target).css('borderColor','red')
-				}else {
-					$(e.target).css('borderColor','rgb(217, 217, 217')
-				}
+			if(!(e.target.value.match(required) && getLength(e.target.value) <= 200)){
+				$(e.target).css('borderColor','red')
+			}else {
+				$(e.target).css('borderColor','rgb(217, 217, 217')
+			}
 			break;
 			case 'certificate':
-				if((e.target.value.match(required) && getLength(e.target.value) <= 200)){
-					$('#timestamp,#version').attr('disabled',false)
-				}else {
-					$('#timestamp,#version').attr('disabled',true)
-				}
+			if((e.target.value.match(required) && getLength(e.target.value) <= 200)){
+				$('#timestamp,#version').attr('disabled',false)
+			}else {
+				$('#timestamp,#version').attr('disabled',true)
+			}
 			default:
 			break;
 		}
@@ -326,8 +326,21 @@ $(function(){
 			$('#continue').on('click',function(e){
 				mainNodeOperate($('#masternodeSwitcher .checked-switch').prop('checked')?2:1)
 			})
+   			//随机密码
+			function  randomPassword(size){
+				var seed=new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z',
+					'a','b','c','d','e','f','g','h','i','j','k','m','n','p','Q','r','s','t','u','v','w','x','y','z','0','1',
+					'2','3','4','5','6','7','8','9'
+					);
+				var seedlength=seed.length;
+				var createPassword='';
+				for(let i=0;i<size;i++){
+					var a=Math.floor(Math.random()*seedlength);
+					createPassword+=seed[a];
+				}
+				returncreatePassword;
 
-
+			}
 			// 初始化获取主节点配置
 			$.ajax({
 				url:'../cgi-bin/readcfg.cgi',
@@ -336,7 +349,7 @@ $(function(){
 				success:function(data){
 					if(data.session!=="failed"){
 						$('#rpcName').val(data.rpcuser)	/* RPC账号*/
-						$('#rpcPwd').val(data.rpcpassword) /* RPC密码*/
+						$('#rpcPwd').val(randomPassword(6)) /* RPC密码*/
 						$('#featureCode').val(data.masternodeprivkey) /* 主节点的特征码*/
 						$('#addIp').val(data.addnode)	/* 额外的同步节点*/
 						$('#certificate').val(data.certificate) /* 证书 */
@@ -349,6 +362,7 @@ $(function(){
 						$('#timestamp').val(data.certifiperiod) /*证书到期日期*/
 						$('#masterNodeSetting .checked-switch').prop('checked',data.masternode=='1')  /*主节点开关*/
 						$('#formatedDate').text(new Date($('#timestamp').val()*1000).toLocaleString())
+
 						if($('#certificate').val()){
 							$('#timestamp,#version').attr('disabled',false)
 						}
@@ -399,15 +413,15 @@ $(function(){
 
 		/**  
     		-- 额外节点开关 --
-		*/
-		  
-		$('#extraNode .checked-switch').on('change',function(e){
-			if($('#certificate').val()){
-				$('#version,#timestamp,#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
-			}else {
-				$('#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
-				$('#version,#timestamp').attr('disabled',true)
-			}
-		})
+*/
 
-		})
+$('#extraNode .checked-switch').on('change',function(e){
+	if($('#certificate').val()){
+		$('#version,#timestamp,#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
+	}else {
+		$('#addIp,#certificate,#publicKey').attr('disabled',!$(e.target).prop('checked'))
+		$('#version,#timestamp').attr('disabled',true)
+	}
+})
+
+})
