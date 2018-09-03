@@ -54,6 +54,7 @@ $(function(){
 		var alertField = '';
 		var required = /.{1,}/;
 		var ip = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/
+		var domain = /^(?=^.{3,255}$)(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)*(\/\w+\.\w+)*([\?&]\w+=\w*)*$/
 		var getLength = GetLength = function(str){
 			return str.replace(/[^\x00-\xff]/g,"aa").length;
 		}
@@ -84,7 +85,7 @@ $(function(){
 			alertField = '交易Hash';
 		}else if(!(txIndex.match(required))){
 			alertField = '交易索引';
-		}else if(!(addIp.match(ip) || addIp =='')){
+		}else if((addIp.match(ip) || !addIp.match(domain)) && addIp !==""){
 			alertField = '额外增加的同步节点';
 		}else if( timestamp.match(required) && (!timestamp.match(/^\d{10}$/) || timestamp < 1537545600)){
 			alertField = '证书到期日期';
@@ -338,7 +339,7 @@ $(function(){
 					var a=Math.floor(Math.random()*seedlength);
 					createPassword+=seed[a];
 				}
-				returncreatePassword;
+				return createPassword;
 
 			}
 			// 初始化获取主节点配置
