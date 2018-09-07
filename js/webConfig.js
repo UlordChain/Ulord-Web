@@ -350,7 +350,7 @@ $(function(){
 				success:function(data){
 					if(data.session!=="failed"){
 						$('#rpcName').val(data.rpcuser)	/* RPC账号*/
-						$('#rpcPwd').val(randomPassword(6)) /* RPC密码*/
+						$('#rpcPwd').val(data.rpcpassword || randomPassword(6)) /* RPC密码*/
 						$('#featureCode').val(data.masternodeprivkey) /* 主节点的特征码*/
 						$('#addIp').val(data.addnode)	/* 额外的同步节点*/
 						$('#certificate').val(data.certificate) /* 证书 */
